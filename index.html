@@ -1483,48 +1483,15 @@
     <form id="contactForm" style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:14px;">
       <input type="text" id="formName" placeholder="Ton prénom" required style="background:#0e0e0e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 18px;color:#fff;font-size:1rem;font-family:'Barlow',sans-serif;outline:none;width:100%;appearance:none;-webkit-appearance:none;" onfocus="this.style.border='1px solid #C8FF00'" onblur="this.style.border='1px solid rgba(255,255,255,0.15)'"/>
       <input type="tel" id="formPhone" placeholder="Ton numéro de téléphone" required style="background:#0e0e0e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 18px;color:#fff;font-size:1rem;font-family:'Barlow',sans-serif;outline:none;width:100%;appearance:none;-webkit-appearance:none;" onfocus="this.style.border='1px solid #C8FF00'" onblur="this.style.border='1px solid rgba(255,255,255,0.15)'"/>
-      <div style="position:relative;">
-        <select id="formSlot" required style="background:#0e0e0e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 18px;color:#fff;font-size:1rem;font-family:'Barlow',sans-serif;outline:none;width:100%;appearance:none;-webkit-appearance:none;color:rgba(255,255,255,0.85);cursor:pointer;padding-right:40px;" onfocus="this.style.border='1px solid #C8FF00'" onblur="this.style.border='1px solid rgba(255,255,255,0.15)'">
-          <option value="" disabled selected style="color:#666;">Choisis un créneau</option>
-          <optgroup label="Lundi">
-            <option value="Lundi 9h00">Lundi — 9h00</option>
-            <option value="Lundi 11h00">Lundi — 11h00</option>
-            <option value="Lundi 14h00">Lundi — 14h00</option>
-            <option value="Lundi 17h00">Lundi — 17h00</option>
-            <option value="Lundi 19h00">Lundi — 19h00</option>
-          </optgroup>
-          <optgroup label="Mardi">
-            <option value="Mardi 9h00">Mardi — 9h00</option>
-            <option value="Mardi 11h00">Mardi — 11h00</option>
-            <option value="Mardi 14h00">Mardi — 14h00</option>
-            <option value="Mardi 17h00">Mardi — 17h00</option>
-            <option value="Mardi 19h00">Mardi — 19h00</option>
-          </optgroup>
-          <optgroup label="Mercredi">
-            <option value="Mercredi 9h00">Mercredi — 9h00</option>
-            <option value="Mercredi 11h00">Mercredi — 11h00</option>
-            <option value="Mercredi 14h00">Mercredi — 14h00</option>
-            <option value="Mercredi 17h00">Mercredi — 17h00</option>
-          </optgroup>
-          <optgroup label="Jeudi">
-            <option value="Jeudi 9h00">Jeudi — 9h00</option>
-            <option value="Jeudi 11h00">Jeudi — 11h00</option>
-            <option value="Jeudi 14h00">Jeudi — 14h00</option>
-            <option value="Jeudi 17h00">Jeudi — 17h00</option>
-            <option value="Jeudi 19h00">Jeudi — 19h00</option>
-          </optgroup>
-          <optgroup label="Vendredi">
-            <option value="Vendredi 9h00">Vendredi — 9h00</option>
-            <option value="Vendredi 11h00">Vendredi — 11h00</option>
-            <option value="Vendredi 14h00">Vendredi — 14h00</option>
-          </optgroup>
-          <optgroup label="Samedi">
-            <option value="Samedi 9h00">Samedi — 9h00</option>
-            <option value="Samedi 11h00">Samedi — 11h00</option>
-          </optgroup>
-        </select>
-        <span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#C8FF00;pointer-events:none;font-size:1rem;">▼</span>
-      </div>
+      <div id="calendarWidget" style="background:#0e0e0e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px;width:100%;">
+  <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:2px;color:#C8FF00;text-transform:uppercase;margin-bottom:12px;">Choisis un jour</p>
+  <div id="dayButtons" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;"></div>
+  <div id="timeSlots" style="margin-top:12px;display:none;">
+    <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:2px;color:#C8FF00;text-transform:uppercase;margin-bottom:10px;">Choisis un horaire</p>
+    <div id="timeButtons" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+  </div>
+  <input type="hidden" id="formSlot" name="formSlot" required/>
+</div>    
       <button type="submit" class="cta-btn" style="margin:0 auto;border:none;width:100%;">📞 Je veux être rappelé</button>
       <p class="cta-sub-note" style="text-align:center;">Appel de 30 min · 100% gratuit · Sans engagement</p>
       <div id="formSuccess" style="display:none;background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.3);border-radius:12px;padding:16px;text-align:center;">
@@ -1620,6 +1587,46 @@
     };
     xhr.send(payload);
   });
+(function() {
+  var jours = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var mois = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+  var horaires = ['9h00','11h00','14h00','17h00','19h00'];
+  var dayContainer = document.getElementById('dayButtons');
+  var timeContainer = document.getElementById('timeSlots');
+  var timeButtons = document.getElementById('timeButtons');
+  var slotInput = document.getElementById('formSlot');
+
+  for (var i = 1; i <= 7; i++) {
+    (function(offset) {
+      var d = new Date();
+      d.setDate(d.getDate() + offset);
+      var label = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()];
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.innerHTML = '<span style="font-size:0.7rem;display:block;opacity:0.7;">' + jours[d.getDay()] + '</span><span style="font-size:1rem;font-weight:900;">' + d.getDate() + '</span><span style="font-size:0.65rem;display:block;opacity:0.7;">' + mois[d.getMonth()] + '</span>';
+      btn.style.cssText = 'flex:0 0 52px;height:64px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;cursor:pointer;font-family:\'Barlow Condensed\',sans-serif;text-align:center;transition:all 0.15s;';
+      btn.addEventListener('click', function() {
+        slotInput.value = '';
+        dayContainer.querySelectorAll('button').forEach(function(b) { b.style.background='#1a1a1a'; b.style.border='1px solid rgba(255,255,255,0.1)'; b.style.color='#fff'; });
+        btn.style.background='rgba(200,255,0,0.15)'; btn.style.border='1px solid #C8FF00'; btn.style.color='#C8FF00';
+        timeButtons.innerHTML = '';
+        horaires.forEach(function(h) {
+          var tbtn = document.createElement('button');
+          tbtn.type = 'button'; tbtn.textContent = h;
+          tbtn.style.cssText = 'padding:10px 16px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;cursor:pointer;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:0.95rem;';
+          tbtn.addEventListener('click', function() {
+            slotInput.value = label + ' à ' + h;
+            timeButtons.querySelectorAll('button').forEach(function(b) { b.style.background='#1a1a1a'; b.style.border='1px solid rgba(255,255,255,0.1)'; b.style.color='#fff'; });
+            tbtn.style.background='rgba(200,255,0,0.15)'; tbtn.style.border='1px solid #C8FF00'; tbtn.style.color='#C8FF00';
+          });
+          timeButtons.appendChild(tbtn);
+        });
+        timeContainer.style.display = 'block';
+      });
+      dayContainer.appendChild(btn);
+    })(i);
+  }
+})();
   function toggleFaq(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
