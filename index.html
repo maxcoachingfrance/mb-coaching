@@ -898,7 +898,7 @@
     <p class="hero-sub">Spécialement conçu pour les hommes entre <strong>30 et 45 ans</strong> qui veulent transformer leur corps sans y passer leur vie.</p>
 
     <div class="badge-count">
-      <span class="num">+150</span>
+      <span class="num">+90</span>
       <span class="label">Transformations réalisées</span>
     </div>
 
@@ -1428,7 +1428,10 @@
 
     <div class="who-card">
       <div class="who-header">
-        <div class="who-avatar">M</div>
+        <div class="who-avatar" style="overflow:hidden;padding:0;background:none;">
+  <img src="max.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;">
+</div>
+
         <div>
           <div class="who-name">Max</div>
           <div class="who-title-tag">Coach · Préparateur Physique Diplômé</div>
@@ -1638,6 +1641,43 @@
   }
 
 </script>
+<div id="pmo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+<div style="background:#111;border:1px solid rgba(200,255,0,0.4);border-radius:24px;padding:32px 28px;max-width:400px;width:100%;text-align:center;position:relative;">
+<button onclick="document.getElementById('pmo').style.display='none'" style="position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.3rem;cursor:pointer;">✕</button>
+<p style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:14px;">📋 Avant de confirmer</p>
+<div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.8rem;color:#fff;line-height:1;margin-bottom:4px;">597 <span style="font-size:1.6rem;color:rgba(255,255,255,0.45);">€</span></div>
+<p style="font-size:0.85rem;color:#C8FF00;font-weight:600;margin-bottom:22px;">Payable en 3x sans frais · soit 199 €/mois</p>
+<ul style="list-style:none;padding:0;margin:0 0 26px;text-align:left;display:flex;flex-direction:column;gap:10px;">
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>12 semaines de coaching 100% personnalisé — programme construit sur ton profil</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Suivi hebdomadaire avec ajustements en temps réel</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Plan nutrition + entraînement calé sur ton agenda</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Accès à l'app MB Coaching 24h/24</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Des habitudes installées pour la vie, pas juste 3 mois</li>
+</ul>
+<button onclick="confirmMB()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;text-transform:uppercase;padding:18px;border-radius:100px;border:none;cursor:pointer;margin-bottom:12px;">✅ Je confirme mon appel gratuit</button>
+<button onclick="document.getElementById('pmo').style.display='none'" style="font-size:0.78rem;color:rgba(255,255,255,0.3);cursor:pointer;text-decoration:underline;background:none;border:none;">Annuler</button>
+</div></div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      window._mbf=f;
+      document.getElementById('pmo').style.display='flex';
+    },true);
+  });
+});
+function confirmMB(){
+  document.getElementById('pmo').style.display='none';
+  if(window._mbf){
+    fetch(window._mbf.action,{method:'POST',body:new FormData(window._mbf)});
+  }
+  document.getElementById('pmo').innerHTML='<div style="background:#111;border:1px solid rgba(200,255,0,0.4);border-radius:24px;padding:48px 28px;max-width:400px;width:100%;text-align:center;"><div style="font-size:3.5rem;margin-bottom:16px;">✅</div><p style="font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.9rem;color:#C8FF00;text-transform:uppercase;">Demande envoyée !</p><p style="color:rgba(255,255,255,0.65);font-size:0.9rem;margin-top:8px;">Max te contactera dans les 24h.</p></div>';
+  document.getElementById('pmo').style.display='flex';
+  setTimeout(function(){document.getElementById('pmo').style.display='none';},4000);
+}
+</script>
+</body>
 
 </body>
 </html>
