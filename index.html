@@ -1481,7 +1481,6 @@
       Places limitées ce mois-ci
     </div>
     <h2 class="final-title">Prêt à <span class="accent">changer</span><br>ton corps ?</h2>
-    <p class="final-sub">Laisse tes coordonnées — Max te rappelle dans les 24h pour ton appel offert.</p>
 
     <form id="contactForm" style="max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:14px;">
       <input type="text" id="formName" placeholder="Ton prénom" required style="background:#0e0e0e;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px 18px;color:#fff;font-size:1rem;font-family:'Barlow',sans-serif;outline:none;width:100%;appearance:none;-webkit-appearance:none;" onfocus="this.style.border='1px solid #C8FF00'" onblur="this.style.border='1px solid rgba(255,255,255,0.15)'"/>
@@ -1642,22 +1641,61 @@
 
 </script>
 <div id="pmo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:24px;">
-<div style="background:#111;border:1px solid rgba(200,255,0,0.4);border-radius:24px;padding:32px 28px;max-width:400px;width:100%;text-align:center;position:relative;">
-<button onclick="document.getElementById('pmo').style.display='none'" style="position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.3rem;cursor:pointer;">✕</button>
-<p style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:14px;">📋 Avant de confirmer</p>
-<div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.8rem;color:#fff;line-height:1;margin-bottom:4px;">597 <span style="font-size:1.6rem;color:rgba(255,255,255,0.45);">€</span></div>
-<p style="font-size:0.85rem;color:#C8FF00;font-weight:600;margin-bottom:22px;">Payable en 3x sans frais · soit 199 €/mois</p>
-<ul style="list-style:none;padding:0;margin:0 0 26px;text-align:left;display:flex;flex-direction:column;gap:10px;">
-<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>12 semaines de coaching 100% personnalisé — programme construit sur ton profil</li>
-<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Suivi hebdomadaire avec ajustements en temps réel</li>
-<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Plan nutrition + entraînement calé sur ton agenda</li>
-<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Accès à l'app MB Coaching 24h/24</li>
-<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;">✓</span>Des habitudes installées pour la vie, pas juste 3 mois</li>
+<div style="background:#111;border:1px solid rgba(200,255,0,0.4);border-radius:24px;padding:32px 28px;max-width:400px;width:100%;text-align:center;position:relative;max-height:90vh;overflow-y:auto;">
+<button onclick="cancelMB()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.3rem;cursor:pointer;">✕</button>
+<p style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:16px;">Pourquoi MB Coaching fait la différence</p>
+<ul style="list-style:none;padding:0;margin:0 0 24px;text-align:left;display:flex;flex-direction:column;gap:12px;">
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Programme 12 semaines 100% personnalisé — construit sur ton profil, pas copié-collé</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Suivi hebdomadaire avec ajustements en temps réel selon tes résultats</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Plan nutrition adapté à tes goûts + entraînement calé sur ton agenda</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Accès à l'app MB Coaching 24h/24 — séances, données, contact direct</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Résultats visibles dès 21 jours, transformation complète en 12 semaines</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Des habitudes installées pour la vie — pas juste 3 mois</li>
+<li style="display:flex;gap:10px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span>Coaching individuel avec un coach diplômé en préparation physique de haut niveau</li>
 </ul>
+<div style="background:rgba(200,255,0,0.06);border:1px solid rgba(200,255,0,0.25);border-radius:16px;padding:20px;margin-bottom:16px;">
+<div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.2rem;color:#fff;line-height:1;margin-bottom:4px;">597 <span style="font-size:1.4rem;color:rgba(255,255,255,0.45);">€</span></div>
+<p style="font-size:0.82rem;color:#C8FF00;font-weight:600;margin-bottom:8px;">Payable en 3x sans frais · soit 199 €/mois</p>
+<p style="font-size:0.78rem;color:rgba(255,255,255,0.4);">Pour 3 mois d'accompagnement complet</p>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px;">
+<span style="font-size:1.1rem;">🛡️</span>
+<p style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.4;">Satisfait ou remboursé — si après 30 jours tu ne vois aucun résultat, je te rembourse intégralement.</p>
+</div>
 <button onclick="confirmMB()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;text-transform:uppercase;padding:18px;border-radius:100px;border:none;cursor:pointer;margin-bottom:12px;">✅ Je confirme mon appel gratuit</button>
-<button onclick="document.getElementById('pmo').style.display='none'" style="font-size:0.78rem;color:rgba(255,255,255,0.3);cursor:pointer;text-decoration:underline;background:none;border:none;">Annuler</button>
+<button onclick="cancelMB()" style="font-size:0.78rem;color:rgba(255,255,255,0.3);cursor:pointer;text-decoration:underline;background:none;border:none;">Annuler</button>
 </div></div>
+
 <script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      window._mbf=f;
+      document.getElementById('pmo').style.display='flex';
+      return false;
+    },true);
+  });
+});
+
+function cancelMB(){
+  document.getElementById('pmo').style.display='none';
+  window._mbf=null;
+}
+
+function confirmMB(){
+  document.getElementById('pmo').style.display='none';
+  if(!window._mbf) return;
+  fetch(window._mbf.action,{method:'POST',body:new FormData(window._mbf)})
+  .finally(function(){
+    document.getElementById('pmo').innerHTML='<div style="background:#111;border:1px solid rgba(200,255,0,0.4);border-radius:24px;padding:48px 28px;max-width:400px;width:100%;text-align:center;"><div style="font-size:3.5rem;margin-bottom:16px;">✅</div><p style="font-family:Barlow Condensed,sans-serif;font-weight:900;font-size:1.9rem;color:#C8FF00;text-transform:uppercase;">Demande envoyée !</p><p style="color:rgba(255,255,255,0.65);font-size:0.9rem;margin-top:8px;">Max te contactera dans les 24h.</p></div>';
+    document.getElementById('pmo').style.display='flex';
+    setTimeout(function(){document.getElementById('pmo').style.display='none';},4000);
+  });
+}
+</script>
+
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('form').forEach(function(f){
     f.addEventListener('submit',function(e){
@@ -1678,6 +1716,65 @@ function confirmMB(){
 }
 </script>
 </body>
+<script>
+// ── ANIMATIONS AU SCROLL ──
+const revealEls = document.querySelectorAll('.reveal, .pain-item, .prog-card, .testi-card, .stat-card, .timeline-item');
+const observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.style.animation = 'mbFadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards';
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+revealEls.forEach(function(el,i){
+  el.style.opacity='0';
+  el.style.transform='translateY(28px)';
+  el.style.animationDelay=(i%4)*0.08+'s';
+  observer.observe(el);
+});
+
+// ── COMPTEUR ANIMÉ SUR LES CHIFFRES ──
+function animateCount(el, target, suffix, duration){
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(function(){
+    start += step;
+    if(start >= target){
+      el.textContent = suffix ? target + suffix : '+' + target;
+      clearInterval(timer);
+    } else {
+      el.textContent = suffix ? Math.floor(start) + suffix : '+' + Math.floor(start);
+    }
+  }, 16);
+}
+
+const countObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const text = el.textContent.trim();
+      if(text === '+90') animateCount(el, 90, null, 1200);
+      if(text === '−12 kg') { el.textContent='−0 kg'; let n=0; const t=setInterval(function(){ n+=0.4; if(n>=12){el.textContent='−12 kg';clearInterval(t);}else{el.textContent='−'+n.toFixed(0)+' kg';}},16);}
+      if(text === '−9 kg') { el.textContent='−0 kg'; let n=0; const t=setInterval(function(){ n+=0.3; if(n>=9){el.textContent='−9 kg';clearInterval(t);}else{el.textContent='−'+n.toFixed(0)+' kg';}},16);}
+      if(text === '−11 kg') { el.textContent='−0 kg'; let n=0; const t=setInterval(function(){ n+=0.35; if(n>=11){el.textContent='−11 kg';clearInterval(t);}else{el.textContent='−'+n.toFixed(0)+' kg';}},16);}
+      if(text === '−7 kg') { el.textContent='−0 kg'; let n=0; const t=setInterval(function(){ n+=0.25; if(n>=7){el.textContent='−7 kg';clearInterval(t);}else{el.textContent='−'+n.toFixed(0)+' kg';}},16);}
+      countObserver.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+
+document.querySelectorAll('.badge-count .num, .stat-num').forEach(function(el){
+  countObserver.observe(el);
+});
+</script>
+
+<style>
+@keyframes mbFadeUp {
+  from { opacity:0; transform:translateY(28px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+</style>
 
 </body>
 </html>
