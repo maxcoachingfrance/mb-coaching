@@ -1544,59 +1544,22 @@
   });
 
   // Formulaire contact - Web3Forms via XMLHttpRequest (compatible Safari)
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var name = document.getElementById('formName').value.trim();
-    var phone = document.getElementById('formPhone').value.trim();
-    var slot = document.getElementById('formSlot').value;
-    if (!name || !phone || !slot) {
-      alert('Merci de remplir tous les champs.');
-      return;
-    }
-    var submitBtn = document.getElementById('contactForm').querySelector('button[type=submit]');
-    submitBtn.textContent = 'Envoi en cours...';
-    submitBtn.disabled = true;
+ document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var name = document.getElementById('formName').value.trim();
+  var phone = document.getElementById('formPhone').value.trim();
+  var slot = document.getElementById('formSlot').value;
+  if (!name || !phone || !slot) {
+    alert('Merci de remplir tous les champs.');
+    return;
+  }
+  window._mbName = name;
+  window._mbPhone = phone;
+  window._mbSlot = slot;
+  document.getElementById('pmo').style.display='flex';
+});
 
-    var payload = JSON.stringify({
-      access_key: 'c2703742-10ba-457e-a153-719c6eb18375',
-      subject: 'Nouvelle demande appel MB Coaching',
-      from_name: 'MB Coaching',
-      name: name,
-      phone: phone,
-      creneau: slot
-    });
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://api.web3forms.com/submit', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        try {
-          var data = JSON.parse(xhr.responseText);
-          if (data.success) {
-            submitBtn.style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
-          } else {
-            submitBtn.textContent = 'Erreur — reessaie';
-            submitBtn.disabled = false;
-          }
-        } catch(e) {
-          submitBtn.textContent = 'Erreur — reessaie';
-          submitBtn.disabled = false;
-        }
-      }
-    };
-    xhr.send(payload);
-  });
-(function() {
-  var jours = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-  var mois = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
-  var horaires = ['11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','15h30','16h00','16h30','17h00','17h30','18h00','18h30','19h00'];
-  var dayContainer = document.getElementById('dayButtons');
-  var timeContainer = document.getElementById('timeSlots');
-  var timeButtons = document.getElementById('timeButtons');
-  var slotInput = document.getElementById('formSlot');
 
   for (var i = 1; i <= 7; i++) {
     (function(offset) {
@@ -1687,9 +1650,10 @@ function cancelMB(){
 function confirmMB(){
   document.getElementById('pmo').style.display='none';
   if(!window._mbf) return;
-  var name = document.getElementById('formName').value.trim();
-  var phone = document.getElementById('formPhone').value.trim();
-  var slot = document.getElementById('formSlot').value;
+ var name = window._mbName;
+var phone = window._mbPhone;
+var slot = window._mbSlot;
+
   var payload = JSON.stringify({
     access_key: 'c2703742-10ba-457e-a153-719c6eb18375',
     subject: 'Nouvelle demande appel MB Coaching',
