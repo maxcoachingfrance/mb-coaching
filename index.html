@@ -1726,7 +1726,7 @@
     document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // ── FORMULAIRE — envoi Web3Forms JSON ──
+  // ── FORMULAIRE — ouvre la pop-up de confirmation ──
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var name = document.getElementById('formName').value.trim();
@@ -1736,9 +1736,22 @@
       alert('Merci de remplir tous les champs.');
       return;
     }
-    var submitBtn = this.querySelector('button[type=submit]');
-    submitBtn.textContent = 'Envoi en cours...';
-    submitBtn.disabled = true;
+    // Afficher le créneau choisi dans la pop-up
+    document.getElementById('popupSlot').textContent = slot;
+    // Ouvrir la pop-up
+    var popup = document.getElementById('confirmPopup');
+    popup.style.display = 'flex';
+    setTimeout(function() { popup.classList.add('popup-visible'); }, 10);
+  });
+
+  // ── ENVOI RÉEL après confirmation ──
+  function sendFormAndClose() {
+    var name = document.getElementById('formName').value.trim();
+    var phone = document.getElementById('formPhone').value.trim();
+    var slot = document.getElementById('formSlot').value;
+    var confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.textContent = 'Envoi en cours...';
+    confirmBtn.disabled = true;
 
     var payload = JSON.stringify({
       access_key: 'c2703742-10ba-457e-a153-719c6eb18375',
@@ -1755,23 +1768,89 @@
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
+        closePopup();
         try {
           var data = JSON.parse(xhr.responseText);
           if (data.success) {
+            var submitBtn = document.getElementById('contactForm').querySelector('button[type=submit]');
             submitBtn.style.display = 'none';
             document.getElementById('formSuccess').style.display = 'block';
           } else {
-            submitBtn.textContent = 'Erreur — réessaie';
-            submitBtn.disabled = false;
+            alert('Une erreur est survenue, réessaie.');
           }
         } catch(err) {
-          submitBtn.textContent = 'Erreur — réessaie';
-          submitBtn.disabled = false;
+          alert('Une erreur est survenue, réessaie.');
         }
       }
     };
     xhr.send(payload);
+  }
+
+  function closePopup() {
+    var popup = document.getElementById('confirmPopup');
+    popup.classList.remove('popup-visible');
+    setTimeout(function() { popup.style.display = 'none'; }, 300);
+    var confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.textContent = '✅ Je confirme mon appel gratuit';
+    confirmBtn.disabled = false;
+  }
+
+  // Fermer en cliquant sur l'overlay
+  document.getElementById('confirmPopup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
   });
 </script>
+
+<!-- ── POP-UP DE CONFIRMATION ── -->
+<div id="confirmPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:20px;transition:opacity 0.3s ease;opacity:0;">
+<style>
+  #confirmPopup.popup-visible { opacity: 1 !important; }
+  #confirmPopup .popup-box { transform: translateY(30px); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+  #confirmPopup.popup-visible .popup-box { transform: translateY(0); }
+</style>
+<div class="popup-box" style="background:#111;border:1px solid rgba(200,255,0,0.35);border-radius:24px;padding:32px 24px;max-width:420px;width:100%;text-align:center;position:relative;max-height:92vh;overflow-y:auto;">
+
+  <button onclick="closePopup()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.4rem;cursor:pointer;line-height:1;">✕</button>
+
+  <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:6px;">Avant de confirmer</p>
+  <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:20px;">Pourquoi MB Coaching<br><span style="color:#C8FF00;">fait la différence</span></h2>
+
+  <!-- Créneau choisi -->
+  <div style="background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.25);border-radius:12px;padding:12px 16px;margin-bottom:20px;text-align:left;">
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Ton créneau sélectionné</p>
+    <p id="popupSlot" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;"></p>
+  </div>
+
+  <!-- Arguments -->
+  <ul style="list-style:none;padding:0;margin:0 0 24px;text-align:left;display:flex;flex-direction:column;gap:10px;">
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Programme 12 semaines <strong style="color:#fff;">100% personnalisé</strong> — construit sur ton profil, pas copié-collé</li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span><strong style="color:#fff;">Suivi hebdomadaire</strong> avec ajustements en temps réel selon tes résultats</li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Nutrition adaptée à tes goûts + entraînement calé sur <strong style="color:#fff;">ton agenda</strong></li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Accès à <strong style="color:#fff;">l'app MB Coaching 24h/24</strong> — séances, données, contact direct</li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Résultats visibles <strong style="color:#fff;">dès 21 jours</strong>, transformation complète en 12 semaines</li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Des habitudes installées <strong style="color:#fff;">pour la vie</strong> — pas juste 3 mois</li>
+    <li style="display:flex;gap:10px;font-size:0.87rem;color:rgba(255,255,255,0.85);line-height:1.5;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;font-size:1rem;">✓</span>Coach diplômé en <strong style="color:#fff;">haute performance sportive</strong> — pas un influenceur</li>
+  </ul>
+
+  <!-- Prix -->
+  <div style="background:rgba(200,255,0,0.06);border:1px solid rgba(200,255,0,0.2);border-radius:16px;padding:20px;margin-bottom:16px;">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3rem;color:#fff;line-height:1;margin-bottom:4px;">597 <span style="font-size:1.3rem;color:rgba(255,255,255,0.4);">€</span></div>
+    <p style="font-size:0.82rem;color:#C8FF00;font-weight:600;margin-bottom:4px;">Payable en 3× sans frais · soit <strong>199 €/mois</strong></p>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Pour 3 mois d'accompagnement complet</p>
+  </div>
+
+  <!-- Garantie -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:22px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:12px;">
+    <span style="font-size:1.2rem;">🛡️</span>
+    <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.4;text-align:left;"><strong style="color:#fff;">Satisfait ou remboursé</strong> — si après 30 jours tu ne vois aucun résultat, je te rembourse intégralement.</p>
+  </div>
+
+  <!-- Boutons -->
+  <button id="confirmBtn" onclick="sendFormAndClose()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;text-transform:uppercase;padding:18px;border-radius:100px;border:none;cursor:pointer;margin-bottom:12px;letter-spacing:0.5px;">✅ Je confirme mon appel gratuit</button>
+  <button onclick="closePopup()" style="font-size:0.8rem;color:rgba(255,255,255,0.35);cursor:pointer;text-decoration:underline;background:none;border:none;padding:4px;">Non, je décline</button>
+
+</div>
+</div>
+
 </body>
 </html>
