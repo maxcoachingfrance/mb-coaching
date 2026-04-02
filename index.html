@@ -1695,6 +1695,73 @@ function confirmMB(){
   });
 }
 </script>
+<script>
+// ── STICKY BTN DISPARAIT SUR LE FORMULAIRE ──
+var stickyBtn = document.querySelector('.sticky-cta');
+var formSection = document.querySelector('.final-cta');
+if(stickyBtn && formSection){
+  window.addEventListener('scroll', function(){
+    var rect = formSection.getBoundingClientRect();
+    if(rect.top < window.innerHeight){
+      stickyBtn.style.opacity='0';
+      stickyBtn.style.pointerEvents='none';
+    } else {
+      stickyBtn.style.opacity='1';
+      stickyBtn.style.pointerEvents='auto';
+    }
+  });
+}
+
+// ── ANIMATIONS AU SCROLL ──
+var els = document.querySelectorAll('.reveal, .pain-item, .prog-card, .testi-card, .stat-card, .timeline-item, .who-card, .faq-item');
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry, i){
+    if(entry.isIntersecting){
+      entry.target.style.animationDelay = (i % 5) * 0.07 + 's';
+      entry.target.style.animation = 'mbPop 0.6s cubic-bezier(0.22,1,0.36,1) forwards';
+      obs.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+els.forEach(function(el){
+  el.style.opacity='0';
+  el.style.transform='translateY(32px) scale(0.96)';
+  obs.observe(el);
+});
+
+// ── COMPTEUR ANIMÉ ──
+function countUp(el, target, prefix, suffix, duration){
+  var start=0, step=target/(duration/16);
+  var t=setInterval(function(){
+    start+=step;
+    if(start>=target){ el.textContent=prefix+target+suffix; clearInterval(t); }
+    else { el.textContent=prefix+Math.floor(start)+suffix; }
+  },16);
+}
+var cobs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var el=entry.target, txt=el.textContent.trim();
+      if(txt==='+90') countUp(el,90,'+','',1000);
+      if(txt==='−12 kg') countUp(el,12,'−',' kg',1000);
+      if(txt==='−9 kg') countUp(el,9,'−',' kg',900);
+      if(txt==='−11 kg') countUp(el,11,'−',' kg',950);
+      if(txt==='−7 kg') countUp(el,7,'−',' kg',800);
+      cobs.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.badge-count .num, .stat-num').forEach(function(el){ cobs.observe(el); });
+</script>
+
+<style>
+@keyframes mbPop {
+  0%   { opacity:0; transform:translateY(32px) scale(0.96); }
+  60%  { transform:translateY(-4px) scale(1.01); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
+}
+.sticky-cta { transition: opacity 0.3s ease; }
+</style>
 
 </body>
 </html>
