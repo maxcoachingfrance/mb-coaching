@@ -1677,41 +1677,76 @@
   (function() {
     var jours = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
     var mois = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
-    var horaires = ['11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','15h30','16h00','16h30','17h00','17h30','18h00','18h30','19h00'];
+    var joursPlein = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+
+    // Horaires selon le jour : 0=Dim (exclu), 1-5=Lun-Ven, 6=Sam
+    var horairesSemaine = ['11h30','13h30','14h30','18h30','19h00'];
+    var horairesSamedi  = ['11h00','12h00'];
+
     var dayContainer = document.getElementById('dayButtons');
     var timeContainer = document.getElementById('timeSlots');
     var timeButtons = document.getElementById('timeButtons');
     var slotInput = document.getElementById('formSlot');
 
-    for (var i = 1; i <= 7; i++) {
-      (function(offset) {
+    var daysAdded = 0;
+    var offset = 1;
+
+    // Ajouter des jours jusqu'à en avoir 7 non-dimanche
+    while (daysAdded < 7) {
+      (function(off) {
         var d = new Date();
-        d.setDate(d.getDate() + offset);
-        var label = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()];
+        d.setDate(d.getDate() + off);
+        var jourIndex = d.getDay(); // 0=Dim
+
+        // Exclure les dimanches
+        if (jourIndex === 0) return;
+
+        var label = joursPlein[jourIndex] + ' ' + d.getDate() + ' ' + mois[d.getMonth()];
+        var horaires = (jourIndex === 6) ? horairesSamedi : horairesSemaine;
+
         var btn = document.createElement('button');
         btn.type = 'button';
-        btn.innerHTML = '<span style="font-size:0.7rem;display:block;opacity:0.7;">' + jours[d.getDay()] + '</span><span style="font-size:1rem;font-weight:900;">' + d.getDate() + '</span><span style="font-size:0.65rem;display:block;opacity:0.7;">' + mois[d.getMonth()] + '</span>';
+        btn.innerHTML = '<span style="font-size:0.7rem;display:block;opacity:0.7;">' + jours[jourIndex] + '</span><span style="font-size:1rem;font-weight:900;">' + d.getDate() + '</span><span style="font-size:0.65rem;display:block;opacity:0.7;">' + mois[d.getMonth()] + '</span>';
         btn.style.cssText = 'flex:0 0 52px;height:64px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;cursor:pointer;font-family:\'Barlow Condensed\',sans-serif;text-align:center;transition:all 0.15s;';
+
         btn.addEventListener('click', function() {
           slotInput.value = '';
-          dayContainer.querySelectorAll('button').forEach(function(b) { b.style.background='#1a1a1a'; b.style.border='1px solid rgba(255,255,255,0.1)'; b.style.color='#fff'; });
-          btn.style.background='rgba(200,255,0,0.15)'; btn.style.border='1px solid #C8FF00'; btn.style.color='#C8FF00';
+          dayContainer.querySelectorAll('button').forEach(function(b) {
+            b.style.background='#1a1a1a';
+            b.style.border='1px solid rgba(255,255,255,0.1)';
+            b.style.color='#fff';
+          });
+          btn.style.background='rgba(200,255,0,0.15)';
+          btn.style.border='1px solid #C8FF00';
+          btn.style.color='#C8FF00';
+
           timeButtons.innerHTML = '';
           horaires.forEach(function(h) {
             var tbtn = document.createElement('button');
-            tbtn.type = 'button'; tbtn.textContent = h;
+            tbtn.type = 'button';
+            tbtn.textContent = h;
             tbtn.style.cssText = 'padding:10px 16px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;cursor:pointer;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:0.95rem;transition:all 0.15s;';
             tbtn.addEventListener('click', function() {
               slotInput.value = label + ' à ' + h;
-              timeButtons.querySelectorAll('button').forEach(function(b) { b.style.background='#1a1a1a'; b.style.border='1px solid rgba(255,255,255,0.1)'; b.style.color='#fff'; });
-              tbtn.style.background='rgba(200,255,0,0.15)'; tbtn.style.border='1px solid #C8FF00'; tbtn.style.color='#C8FF00';
+              timeButtons.querySelectorAll('button').forEach(function(b) {
+                b.style.background='#1a1a1a';
+                b.style.border='1px solid rgba(255,255,255,0.1)';
+                b.style.color='#fff';
+              });
+              tbtn.style.background='rgba(200,255,0,0.15)';
+              tbtn.style.border='1px solid #C8FF00';
+              tbtn.style.color='#C8FF00';
             });
             timeButtons.appendChild(tbtn);
           });
           timeContainer.style.display = 'block';
         });
+
         dayContainer.appendChild(btn);
-      })(i);
+        daysAdded++;
+      })(offset);
+      offset++;
+      if (offset > 14) break; // sécurité
     }
   })();
 
@@ -1802,52 +1837,142 @@
 </script>
 
 <!-- ── POP-UP DE CONFIRMATION ── -->
-<div id="confirmPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:20px;transition:opacity 0.3s ease;opacity:0;">
+<div id="confirmPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:16px;transition:opacity 0.3s ease;opacity:0;">
 <style>
   #confirmPopup.popup-visible { opacity: 1 !important; }
-  #confirmPopup .popup-box { transform: translateY(30px); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+  #confirmPopup .popup-box { transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
   #confirmPopup.popup-visible .popup-box { transform: translateY(0); }
+  .popup-arg { display:flex; align-items:flex-start; gap:14px; padding:12px 14px; border-radius:12px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); transition: border-color 0.2s; }
+  .popup-arg:hover { border-color: rgba(200,255,0,0.2); }
+  .popup-icon { width:36px; height:36px; border-radius:10px; background:rgba(200,255,0,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; }
+  .popup-arg-text { display:flex; flex-direction:column; gap:2px; }
+  .popup-arg-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.5px; color:#fff; }
+  .popup-arg-desc { font-size:0.8rem; color:rgba(255,255,255,0.55); line-height:1.45; }
+  .popup-price-tag { display:inline-block; background:#C8FF00; color:#080808; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px; padding:3px 10px; border-radius:100px; margin-bottom:8px; }
 </style>
-<div class="popup-box" style="background:#111;border:1px solid rgba(200,255,0,0.35);border-radius:24px;padding:32px 24px;max-width:420px;width:100%;text-align:center;position:relative;max-height:92vh;overflow-y:auto;">
+<div class="popup-box" style="background:#111;border:1px solid rgba(200,255,0,0.3);border-radius:24px;width:100%;max-width:430px;text-align:center;position:relative;max-height:94vh;overflow-y:auto;scrollbar-width:none;">
+  <style>#confirmPopup .popup-box::-webkit-scrollbar{display:none;}</style>
 
-  <button onclick="closePopup()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.4rem;cursor:pointer;line-height:1;">✕</button>
+  <!-- Header -->
+  <div style="padding:28px 24px 0;position:sticky;top:0;background:#111;z-index:2;border-radius:24px 24px 0 0;">
+    <button onclick="closePopup()" style="position:absolute;top:16px;right:18px;background:rgba(255,255,255,0.07);border:none;color:rgba(255,255,255,0.5);font-size:1rem;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">✕</button>
+    <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:6px;">Une dernière chose avant de confirmer</p>
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.55rem;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:16px;">Voici ce que tu obtiens<br><span style="color:#C8FF00;">avec MB Coaching</span></h2>
 
-  <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:6px;">Avant de confirmer</p>
-  <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:20px;">Pourquoi MB Coaching<br><span style="color:#C8FF00;">fait la différence</span></h2>
-
-  <!-- Créneau choisi -->
-  <div style="background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.25);border-radius:12px;padding:12px 16px;margin-bottom:20px;text-align:left;">
-    <p style="font-size:0.72rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;">Ton créneau sélectionné</p>
-    <p id="popupSlot" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;"></p>
+    <!-- Créneau -->
+    <div style="background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.2);border-radius:10px;padding:10px 14px;margin-bottom:20px;text-align:left;display:flex;align-items:center;gap:10px;">
+      <span style="font-size:1.2rem;">📅</span>
+      <div>
+        <p style="font-size:0.65rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-bottom:2px;">Ton créneau</p>
+        <p id="popupSlot" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;color:#C8FF00;"></p>
+      </div>
+    </div>
   </div>
 
   <!-- Arguments -->
-  <ul style="list-style:none;padding:0;margin:0 0 24px;text-align:left;display:flex;flex-direction:column;gap:10px;">
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Programme 12 semaines 100% personnalisé — construit sur ton profil, pas copié-collé</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Suivi hebdomadaire avec ajustements en temps réel selon tes résultats</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Plan nutrition adapté à tes goûts + entraînement calé sur ton agenda</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Accès à l'app MB Coaching 24h/24 — séances, données, contact direct avec Max</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Résultats visibles dès 21 jours, transformation complète en 12 semaines</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Des habitudes installées pour la vie — pas juste 3 mois</span></li>
-    <li style="display:flex;align-items:flex-start;gap:12px;font-size:0.88rem;color:rgba(255,255,255,0.85);line-height:1.55;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;margin-top:1px;">✓</span><span>Coach diplômé en haute performance sportive — pas un influenceur qui vend du rêve</span></li>
-  </ul>
+  <div style="padding:0 20px;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
 
-  <!-- Prix -->
-  <div style="background:rgba(200,255,0,0.06);border:1px solid rgba(200,255,0,0.2);border-radius:16px;padding:20px;margin-bottom:16px;">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3rem;color:#fff;line-height:1;margin-bottom:4px;">597 <span style="font-size:1.3rem;color:rgba(255,255,255,0.4);">€</span></div>
-    <p style="font-size:0.82rem;color:#C8FF00;font-weight:600;margin-bottom:4px;">Payable en 3× sans frais · soit <strong>199 €/mois</strong></p>
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Pour 3 mois d'accompagnement complet</p>
+    <div class="popup-arg">
+      <div class="popup-icon">🎯</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">Programme 100% sur-mesure</span>
+        <span class="popup-arg-desc">Construit de zéro sur ton profil, ton agenda, tes goûts. Pas un template copié-collé.</span>
+      </div>
+    </div>
+
+    <div class="popup-arg">
+      <div class="popup-icon">📊</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">Suivi hebdomadaire réel</span>
+        <span class="popup-arg-desc">Check-in chaque semaine. Si ça ne fonctionne pas, j'ajuste immédiatement — pas dans 4 semaines.</span>
+      </div>
+    </div>
+
+    <div class="popup-arg">
+      <div class="popup-icon">🥗</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">Nutrition sans privation</span>
+        <span class="popup-arg-desc">Un déficit intelligent adapté à ce que tu aimes manger. Aucun régime drastique.</span>
+      </div>
+    </div>
+
+    <div class="popup-arg">
+      <div class="popup-icon">📱</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">App MB Coaching 24h/24</span>
+        <span class="popup-arg-desc">Tes séances, ton suivi, tes données et Max en direct — tout dans une seule app.</span>
+      </div>
+    </div>
+
+    <div class="popup-arg">
+      <div class="popup-icon">⚡</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">Résultats dès 21 jours</span>
+        <span class="popup-arg-desc">Moins de ballonnements, plus d'énergie, vêtements moins serrés. Et jusqu'à −12 kg en 12 semaines.</span>
+      </div>
+    </div>
+
+    <div class="popup-arg">
+      <div class="popup-icon">🏆</div>
+      <div class="popup-arg-text">
+        <span class="popup-arg-title">Coach diplômé haut niveau</span>
+        <span class="popup-arg-desc">Ingénierie de la haute performance sportive. Ex-responsable performance en club pro.</span>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Garantie -->
-  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:22px;padding:12px 16px;background:rgba(255,255,255,0.04);border-radius:12px;">
-    <span style="font-size:1.2rem;">🛡️</span>
-    <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.4;text-align:left;"><strong style="color:#fff;">Satisfait ou remboursé</strong> — si après 30 jours tu ne vois aucun résultat, je te rembourse intégralement.</p>
+  <!-- Séparateur -->
+  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,255,0,0.2),transparent);margin:0 20px 20px;"></div>
+
+  <!-- Prix -->
+  <div style="padding:0 20px 20px;">
+    <div style="background:linear-gradient(135deg,rgba(200,255,0,0.08) 0%,rgba(200,255,0,0.03) 100%);border:1px solid rgba(200,255,0,0.2);border-radius:16px;padding:20px;">
+      <div class="popup-price-tag">Investissement</div>
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:6px;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.2rem;color:#fff;line-height:1;">597</span>
+        <span style="font-size:1.1rem;color:rgba(255,255,255,0.4);font-family:'Barlow Condensed',sans-serif;">€</span>
+      </div>
+      <p style="font-size:0.85rem;color:#C8FF00;font-weight:600;margin-bottom:4px;">Payable en 3× sans frais · <strong>199 €/mois</strong></p>
+      <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);">Pour 3 mois d'accompagnement complet</p>
+
+      <!-- Comparatif -->
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-around;text-align:center;">
+        <div>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Salle de sport</p>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:rgba(255,255,255,0.5);font-size:0.95rem;">~60 €/mois</p>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.25);">sans résultats</p>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
+        <div>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Coach perso salle</p>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:rgba(255,255,255,0.5);font-size:0.95rem;">~400 €/mois</p>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.25);">sans suivi nutrition</p>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
+        <div>
+          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">MB Coaching</p>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:900;color:#C8FF00;font-size:0.95rem;">199 €/mois</p>
+          <p style="font-size:0.65rem;color:rgba(200,255,0,0.5);">tout inclus</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Garantie -->
+    <div style="display:flex;align-items:center;gap:12px;margin-top:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;text-align:left;">
+      <span style="font-size:1.6rem;flex-shrink:0;">🛡️</span>
+      <div>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.9rem;color:#fff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Satisfait ou remboursé</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.4;">Si après 30 jours tu ne vois aucun résultat, je te rembourse intégralement. Aucune question posée.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Boutons -->
-  <button id="confirmBtn" onclick="sendFormAndClose()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;text-transform:uppercase;padding:18px;border-radius:100px;border:none;cursor:pointer;margin-bottom:12px;letter-spacing:0.5px;">✅ Je confirme mon appel gratuit</button>
-  <button onclick="closePopup()" style="font-size:0.8rem;color:rgba(255,255,255,0.35);cursor:pointer;text-decoration:underline;background:none;border:none;padding:4px;">Non, je décline</button>
+  <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;">
+    <button id="confirmBtn" onclick="sendFormAndClose()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.25rem;text-transform:uppercase;padding:19px 24px;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.5px;box-shadow:0 0 30px rgba(200,255,0,0.4);">📞 Je confirme mon appel gratuit</button>
+    <button onclick="closePopup()" style="font-size:0.78rem;color:rgba(255,255,255,0.3);cursor:pointer;text-decoration:underline;background:none;border:none;padding:4px;">Non merci, je décline</button>
+  </div>
 
 </div>
 </div>
