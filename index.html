@@ -1788,6 +1788,8 @@
     var confirmBtn = document.getElementById('confirmBtn');
     confirmBtn.textContent = 'Envoi en cours...';
     confirmBtn.disabled = true;
+var slot = document.getElementById('formSlot').value;
+var parrain = document.getElementById('formParrain').value || 'Non renseigné';
 
     var payload = JSON.stringify({
       access_key: 'c2703742-10ba-457e-a153-719c6eb18375',
@@ -1797,6 +1799,7 @@
       phone: phone,
       creneau: slot
     });
+parrain: parrain,
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api.web3forms.com/submit', true);
