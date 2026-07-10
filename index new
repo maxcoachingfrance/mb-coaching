@@ -1004,11 +1004,10 @@
       </div>
     </div>
 
-    <p style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;color:#C8FF00;background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.25);border-radius:100px;padding:8px 16px;display:inline-block;margin:0 auto 10px;">⚠️ Seulement 15 places disponibles ce mois-ci</p>
-    <p style="text-align:center;font-size:0.85rem;margin-bottom:14px;"><span style="color:rgba(255,255,255,0.4);text-decoration:line-through;">Bilan téléphonique 45€</span> <strong style="color:#C8FF00;">→ Offert</strong></p>
+    <p style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;color:#C8FF00;background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.25);border-radius:100px;padding:8px 16px;display:inline-block;margin:0 auto 14px;">⚠️ Seulement 15 places disponibles ce mois-ci</p>
 
     <button onclick="scrollToForm()" class="cta-btn" style="border:none;cursor:pointer;width:100%;">🔥 Réserve ton appel offert</button>
-    <p class="cta-sub-note">Appel stratégique de 30 min · 100% gratuit</p>
+    <p class="cta-sub-note">Appel stratégique de 30 min · 100% offert <span style="color:rgba(255,255,255,0.35);text-decoration:line-through;">45€</span></p>
   </section>
 
   <div class="divider"></div>
@@ -1048,7 +1047,7 @@
   <!-- MÉTHODE MB -->
   <section class="prog-section reveal">
     <p class="section-label">La méthode MB</p>
-    <h2 class="section-title">Un programme <span class="lime">fait pour toi</span><br>et personne d'autre</h2>
+    <h2 class="section-title">Un programme<br><span class="lime">fait pour toi</span> et personne d'autre</h2>
 
     <div style="max-width:420px;margin:20px auto 28px;padding:20px 22px;background:#0e0e0e;border:1px solid rgba(200,255,0,0.18);border-radius:16px;">
       <p style="font-size:0.95rem;color:rgba(255,255,255,0.75);line-height:1.75;">
@@ -1866,18 +1865,13 @@
     <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:#C8FF00;margin-bottom:6px;">Une dernière chose avant de confirmer</p>
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.55rem;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:16px;">Voici ce que tu obtiens<br><span style="color:#C8FF00;">avec MB Coaching</span></h2>
 
-    <!-- Bilan offert -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px;">
-      <span style="font-size:0.85rem;color:rgba(255,255,255,0.35);text-decoration:line-through;">Bilan téléphonique 45€</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;color:#080808;background:#C8FF00;padding:3px 10px;border-radius:100px;">Offert aujourd'hui</span>
-    </div>
-
     <!-- Créneau -->
     <div style="background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;text-align:left;display:flex;align-items:center;gap:10px;">
       <span style="font-size:1.2rem;">📅</span>
       <div>
         <p style="font-size:0.65rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:2px;margin-bottom:2px;">Ton créneau</p>
         <p id="popupSlot" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;color:#C8FF00;"></p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:4px;">Appel téléphonique 30 min · 100% offert <span style="color:rgba(255,255,255,0.3);text-decoration:line-through;">45€</span></p>
       </div>
     </div>
 
