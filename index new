@@ -1765,6 +1765,38 @@
     document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // ── SÉLECTION DE FORMULE (pop-up) ──
+  var selectedOffer = null;
+  var offers = {
+    1: { label: 'Suivi complet · 3 mois', price: '599€' },
+    2: { label: 'Programme & App · 3 mois', price: '249€' }
+  };
+  function selectOffer(n) {
+    selectedOffer = n;
+    [1, 2].forEach(function(i) {
+      var card = document.getElementById('offerCard' + i);
+      var radio = document.getElementById('offerRadio' + i);
+      if (i === n) {
+        card.style.borderColor = '#C8FF00';
+        card.style.background = 'linear-gradient(135deg,rgba(200,255,0,0.16) 0%,rgba(200,255,0,0.05) 100%)';
+        radio.style.borderColor = '#C8FF00';
+        radio.style.background = 'radial-gradient(circle, #C8FF00 0%, #C8FF00 45%, transparent 50%)';
+      } else {
+        card.style.borderColor = 'rgba(255,255,255,0.1)';
+        card.style.background = 'rgba(255,255,255,0.03)';
+        radio.style.borderColor = 'rgba(255,255,255,0.3)';
+        radio.style.background = 'transparent';
+      }
+    });
+    var confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.disabled = false;
+    confirmBtn.style.cursor = 'pointer';
+    confirmBtn.style.background = '#C8FF00';
+    confirmBtn.style.color = '#080808';
+    confirmBtn.style.boxShadow = '0 0 30px rgba(200,255,0,0.4)';
+    confirmBtn.textContent = '📞 Je réserve mon appel';
+  }
+
   // ── FORMULAIRE — ouvre la pop-up de confirmation ──
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1785,6 +1817,10 @@
 
   // ── ENVOI RÉEL après confirmation ──
   function sendFormAndClose() {
+    if (!selectedOffer) {
+      alert('Merci de choisir une formule avant de confirmer.');
+      return;
+    }
     var name = document.getElementById('formName').value.trim();
     var phone = document.getElementById('formPhone').value.trim();
     var slot = document.getElementById('formSlot').value;
@@ -1800,6 +1836,7 @@
       name: name,
       phone: phone,
       creneau: slot,
+      formule: offers[selectedOffer].label + ' — ' + offers[selectedOffer].price,
       parrain: parrain
     });
 
@@ -1832,8 +1869,19 @@
     popup.classList.remove('popup-visible');
     setTimeout(function() { popup.style.display = 'none'; }, 300);
     var confirmBtn = document.getElementById('confirmBtn');
-    confirmBtn.textContent = '✅ Je confirme mon appel gratuit';
-    confirmBtn.disabled = false;
+    confirmBtn.textContent = '📞 Choisis une formule ci-dessus';
+    confirmBtn.disabled = true;
+    confirmBtn.style.cursor = 'not-allowed';
+    confirmBtn.style.background = 'rgba(200,255,0,0.25)';
+    confirmBtn.style.color = 'rgba(8,8,8,0.5)';
+    confirmBtn.style.boxShadow = 'none';
+    selectedOffer = null;
+    [1, 2].forEach(function(i) {
+      document.getElementById('offerCard' + i).style.borderColor = 'rgba(255,255,255,0.1)';
+      document.getElementById('offerCard' + i).style.background = 'rgba(255,255,255,0.03)';
+      document.getElementById('offerRadio' + i).style.borderColor = 'rgba(255,255,255,0.3)';
+      document.getElementById('offerRadio' + i).style.background = 'transparent';
+    });
   }
 
   // Fermer en cliquant sur l'overlay
@@ -1939,39 +1987,51 @@
 
   <!-- Prix -->
   <div style="padding:0 20px 20px;">
-    <div style="background:linear-gradient(135deg,rgba(200,255,0,0.08) 0%,rgba(200,255,0,0.03) 100%);border:1px solid rgba(200,255,0,0.2);border-radius:16px;padding:20px;">
-      <div class="popup-price-tag">Offre limitée · Investissement</div>
-      <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px;">
-        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.6rem;color:rgba(255,255,255,0.35);text-decoration:line-through;">1199€</span>
-        <span style="display:flex;align-items:baseline;gap:6px;">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.2rem;color:#fff;line-height:1;">597</span>
-          <span style="font-size:1.1rem;color:rgba(255,255,255,0.4);font-family:'Barlow Condensed',sans-serif;">€</span>
-        </span>
-      </div>
-      <p style="font-size:0.85rem;color:#C8FF00;font-weight:600;margin-bottom:4px;">Payable en 3× sans frais · <strong>199 €/mois</strong></p>
-      <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);">Pour 3 mois d'accompagnement complet — tarif préférentiel, places limitées ce mois-ci</p>
+    <div class="popup-price-tag" style="display:block;text-align:center;width:fit-content;margin:0 auto 4px;">Offre limitée · Choisis ta formule</div>
+    <p style="text-align:center;font-size:0.7rem;color:rgba(255,255,255,0.35);margin-bottom:14px;">Sélectionne la formule qui t'intéresse le plus</p>
 
-      <!-- Comparatif -->
-      <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-around;text-align:center;">
-        <div>
-          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Salle de sport</p>
-          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:rgba(255,255,255,0.5);font-size:0.95rem;">~60 €/mois</p>
-          <p style="font-size:0.65rem;color:rgba(255,255,255,0.25);">sans résultats</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <!-- Offre 1 : 3 mois suivi complet -->
+      <div id="offerCard1" onclick="selectOffer(1)" style="cursor:pointer;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;transition:border-color .15s,background .15s;">
+        <div style="display:flex;justify-content:center;">
+          <span id="offerRadio1" style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:inline-block;margin-bottom:10px;position:relative;"></span>
         </div>
-        <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
-        <div>
-          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Coach perso salle</p>
-          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:rgba(255,255,255,0.5);font-size:0.95rem;">~400 €/mois</p>
-          <p style="font-size:0.65rem;color:rgba(255,255,255,0.25);">sans suivi nutrition</p>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.95rem;color:#fff;text-transform:uppercase;margin-bottom:6px;">Suivi complet · 3 mois</p>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:6px;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:#fff;line-height:1;">599€</span>
+          <span style="font-size:0.85rem;color:#C8FF00;font-weight:600;">soit ~200 €/mois</span>
         </div>
-        <div style="width:1px;background:rgba(255,255,255,0.08);"></div>
-        <div>
-          <p style="font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">MB Coaching</p>
-          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:900;color:#C8FF00;font-size:0.95rem;">199 €/mois</p>
-          <p style="font-size:0.65rem;color:rgba(200,255,0,0.5);">tout inclus</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.4;margin-bottom:12px;">La formule complète pour des résultats maximum.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;align-items:center;">
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.85);text-align:left;"><strong style="color:#fff;">Bilan initial complet</strong> offert</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.85);text-align:left;"><strong style="color:#fff;">Suivi & disponibilité quotidienne du coach</strong> pendant 3 mois</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.85);text-align:left;"><strong style="color:#fff;">Programme d'entraînement & alimentaire</strong> sur-mesure, sur 3 mois</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:#C8FF00;font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.85);text-align:left;">Accès complet à la <strong style="color:#fff;">MB APP</strong> pendant 3 mois</span></div>
         </div>
       </div>
+
+      <!-- Offre 2 : 1 mois suivi + 3 mois programmes/app -->
+      <div id="offerCard2" onclick="selectOffer(2)" style="cursor:pointer;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;transition:border-color .15s,background .15s;">
+        <div style="display:flex;justify-content:center;">
+          <span id="offerRadio2" style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);display:inline-block;margin-bottom:10px;position:relative;"></span>
+        </div>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:0.95rem;color:#fff;text-transform:uppercase;margin-bottom:6px;">Programme & App · 3 mois</p>
+        <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:6px;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:#fff;line-height:1;">249€</span>
+        </div>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.4;margin-bottom:12px;">La formule pour démarrer avec un budget plus léger.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;align-items:center;">
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:rgba(255,255,255,0.4);font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.7);text-align:left;">Bilan initial complet offert</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:rgba(255,255,255,0.4);font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.7);text-align:left;">Suivi & disponibilité quotidienne du coach <strong style="color:#fff;">pendant 1 mois</strong></span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:rgba(255,255,255,0.4);font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.7);text-align:left;"><strong style="color:#fff;">Programme d'entraînement & alimentaire</strong> sur-mesure, sur 3 mois</span></div>
+          <div style="display:flex;align-items:flex-start;gap:8px;max-width:280px;"><span style="color:rgba(255,255,255,0.4);font-weight:900;flex-shrink:0;">✓</span><span style="font-size:0.82rem;color:rgba(255,255,255,0.7);text-align:left;">Accès complet à la <strong style="color:#fff;">MB APP</strong> pendant 3 mois</span></div>
+        </div>
+      </div>
+
     </div>
+
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:12px;">Tarifs préférentiels — places limitées ce mois-ci</p>
 
     <!-- Garantie -->
     <div style="display:flex;align-items:center;gap:12px;margin-top:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;text-align:left;">
@@ -1985,7 +2045,8 @@
 
   <!-- Boutons -->
   <div style="padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;">
-    <button id="confirmBtn" onclick="sendFormAndClose()" style="display:block;width:100%;background:#C8FF00;color:#080808;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.25rem;text-transform:uppercase;padding:19px 24px;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.5px;box-shadow:0 0 30px rgba(200,255,0,0.4);">📞 Je confirme mon appel gratuit</button>
+    <p style="text-align:center;font-size:0.72rem;color:rgba(255,255,255,0.4);line-height:1.4;">💬 Aucun paiement maintenant — c'est un aperçu des formules, on choisit ensemble la meilleure pour toi pendant l'appel.</p>
+    <button id="confirmBtn" onclick="sendFormAndClose()" disabled style="display:block;width:100%;background:rgba(200,255,0,0.25);color:rgba(8,8,8,0.5);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.25rem;text-transform:uppercase;padding:19px 24px;border-radius:100px;border:none;cursor:not-allowed;letter-spacing:0.5px;transition:all .15s;">📞 Choisis une formule ci-dessus</button>
     <button onclick="closePopup()" style="font-size:0.78rem;color:rgba(255,255,255,0.3);cursor:pointer;text-decoration:underline;background:none;border:none;padding:4px;">Non merci, je décline</button>
   </div>
 
