@@ -752,20 +752,21 @@
       from_name: 'Site MB Coaching',
       message: message
     };
-    if (navigator.sendBeacon){
-      var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
-      navigator.sendBeacon('https://api.web3forms.com/submit', blob);
-    } else {
+    try {
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        keepalive: true
       });
-    }
+    } catch (e) {}
   }
 
   window.addEventListener('pagehide', sendVisitEmail);
   window.addEventListener('beforeunload', sendVisitEmail);
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'hidden') sendVisitEmail();
+  });
 })();
 </script>
 
