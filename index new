@@ -702,6 +702,8 @@
   var sectionsSeen = [];
   var clicksLog = [];
   var visitorLocation = 'Localisation en cours...';
+  var visitorIP = null;
+  var visitCount = null; // nombre de visites de cette même IP (via CountAPI)
 
   function labelFor(el){
     if(!el) return null;
@@ -742,12 +744,21 @@
     });
   }
 
+  // 1) On récupère la localisation + l'IP du visiteur
+  // 2) On incrémente un compteur de visites propre à cette IP (via CountAPI, gratuit, sans backend)
   fetch('https://ipapi.co/json/')
     .then(function(r){ return r.json(); })
     .then(function(data){
       visitorLocation = (data.city || 'Ville inconnue') + ', ' +
                 (data.region || 'Région inconnue') + ' (' +
                 (data.country_name || 'Pays inconnu') + ')';
+      visitorIP = data.ip || null;
+      if(!visitorIP) return null;
+      var key = visitorIP.replace(/[^a-zA-Z0-9]/g, '-'); // clé URL-safe (ex: 82-64-12-3)
+      return fetch('https://api.countapi.xyz/hit/mbcoaching-visites/' + key)
+        .then(function(r){ return r.json(); })
+        .then(function(res){ visitCount = res && res.value ? res.value : null; })
+        .catch(function(){ visitCount = null; });
     })
     .catch(function(){
       visitorLocation = 'Localisation non disponible';
@@ -758,8 +769,17 @@
     if (emailSent) return;
     emailSent = true;
     var timeSpent = Math.round((Date.now() - startTime) / 1000);
+
+    // Libellé du nombre de visite pour l'objet du mail
+    var visitLabel;
+    if (visitCount === 1) visitLabel = '1ère visite';
+    else if (visitCount) visitLabel = visitCount + 'e visite (déjà venu)';
+    else visitLabel = 'Visite';
+
     var message = 'Quelqu\'un a visité le site MB Coaching.' +
                '\nPage : ' + window.location.href +
+               '\nIP : ' + (visitorIP || 'inconnue') +
+               '\nNombre de visites de cette IP : ' + (visitCount || 'inconnu') +
                '\nLocalisation : ' + visitorLocation +
                '\nTemps passé sur le site : ' + timeSpent + ' sec' +
                '\nSections consultées : ' + (sectionsSeen.length ? sectionsSeen.join(', ') : 'aucune') +
@@ -767,7 +787,7 @@
                '\nDate : ' + new Date().toLocaleString('fr-FR');
     var payload = {
       access_key: 'c2703742-10ba-457e-a153-719c6eb18375',
-      subject: 'Visite du site - Site MB Coaching',
+      subject: visitLabel + ' - Site MB Coaching',
       from_name: 'Site MB Coaching',
       message: message
     };
