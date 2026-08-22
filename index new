@@ -246,6 +246,19 @@
   .studio-wrap .section-title{padding-top:0;padding-left:20px;padding-right:20px;padding-bottom:20px;}
   .sa-grid{display:flex;gap:16px;overflow-x:auto;padding:0 20px 14px;scrollbar-width:none;}
   .sa-grid::-webkit-scrollbar{display:none;}
+  .sa-app-cta{padding:14px 20px 0;max-width:350px;margin:0 auto;}
+  @keyframes saAppPulse{
+    0%{box-shadow:0 0 0 0 rgba(255,58,58,0.55);border-color:var(--red);}
+    70%{box-shadow:0 0 0 12px rgba(255,58,58,0);border-color:var(--red);}
+    100%{box-shadow:0 0 0 0 rgba(255,58,58,0);border-color:rgba(10,10,10,0.3);}
+  }
+  .sa-app-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+    background:transparent;color:#0a0a0a;border:1.5px solid rgba(10,10,10,0.3);border-radius:10px;
+    padding:12px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.4px;
+    text-transform:uppercase;text-decoration:none;cursor:pointer;
+    animation:saAppPulse 1.8s ease-out infinite;
+  }
   .sa-card{
     flex:0 0 260px;border-radius:22px;padding:2.5px;
     background:#fff;
@@ -316,6 +329,7 @@
   }
   .contact-btn.wa{background:#25D366;color:#0a0a0a;}
   .contact-btn.call{background:#fff;color:var(--red);}
+  .contact-btn.dark{background:#0a0a0a;color:#fff;}
 
   /* CALLBACK MODAL */
   .modal-overlay{
@@ -330,6 +344,14 @@
   .modal-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:#fff;text-transform:uppercase;margin-bottom:18px;text-align:center;}
   .modal-field{margin-bottom:16px;}
   .modal-field label{display:block;font-size:0.78rem;color:rgba(255,255,255,0.55);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;font-family:'Barlow Condensed',sans-serif;font-weight:700;}
+  .mb-app-modal-box{
+    background:#141414;width:100%;max-width:480px;border-radius:22px 22px 0 0;
+    padding:16px;max-height:92vh;height:92vh;display:flex;flex-direction:column;
+  }
+  .mb-app-modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px;}
+  .mb-app-close-btn{background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.1rem;width:34px;height:34px;border-radius:50%;cursor:pointer;line-height:1;}
+  .mb-app-iframe{flex:1;width:100%;border:none;border-radius:14px;background:#fff;}
+
   .modal-field input, .modal-field select{
     width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);
     border-radius:10px;padding:13px 14px;color:#fff;font-size:0.95rem;font-family:'Barlow',sans-serif;
@@ -554,7 +576,9 @@
           <div class="offer-item"><span class="check">&#10003;</span><span>Force, puissance, explosivit&eacute;, vitesse, mobilit&eacute;</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Pr&eacute;vention des blessures</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Travail compl&eacute;mentaire &agrave; r&eacute;aliser en autonomie</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Application MB Coaching</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Optimisation des points forts</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Analyse vid&eacute;o de la gestuelle (course, jeu)</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi de la charge et de la r&eacute;cup&eacute;ration via questionnaires RPE et Hooper</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Ajustements du programme</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilan final</span></div>
         </div>
@@ -581,7 +605,9 @@
           <div class="offer-item"><span class="check">&#10003;</span><span>Pr&eacute;vention des blessures</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Adaptation au calendrier sportif</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Ajustement de la programmation</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi via application</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Optimisation des points forts</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Analyse vid&eacute;o de la gestuelle (course, jeu)</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi de la charge et de la r&eacute;cup&eacute;ration via questionnaires RPE et Hooper</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp quotidien</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;change avec staff, club ou s&eacute;lection</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilans interm&eacute;diaires</span></div>
@@ -628,6 +654,9 @@
     <p class="sa-text"><b>Contact direct avec Max</b> — Vous avez une question, un doute sur un exercice ? Vous m'envoyez un message depuis l'app. Réponse sous 24h garantie.</p>
     <p class="sa-text"><b>Tous vos documents au même endroit</b> — Plan alimentaire, bilans hebdo, historique de vos performances, accessibles à tout moment, sans chercher dans vos mails.</p>
     </div></div>
+  </div>
+  <div class="sa-app-cta">
+    <a class="sa-app-btn" href="#" onclick="document.getElementById('mbAppModal').classList.add('open');return false;">Découvrir MB APP</a>
   </div>
 </div>
 
@@ -730,6 +759,17 @@
       <p style="color:rgba(255,255,255,0.75);font-size:0.9rem;line-height:1.5;margin-bottom:20px;">Votre demande a bien été envoyée. Je vous recontacte très vite.</p>
       <button class="modal-submit" onclick="closeCallbackModal()">Fermer</button>
     </div>
+  </div>
+</div>
+
+<!-- MB APP MODAL -->
+<div class="modal-overlay" id="mbAppModal">
+  <div class="modal-box mb-app-modal-box">
+    <div class="mb-app-modal-header">
+      <p class="modal-title" style="margin-bottom:0;">MB App</p>
+      <button class="mb-app-close-btn" onclick="document.getElementById('mbAppModal').classList.remove('open')">✕</button>
+    </div>
+    <iframe src="https://mb-1jh.pages.dev/" class="mb-app-iframe" title="MB App"></iframe>
   </div>
 </div>
 
