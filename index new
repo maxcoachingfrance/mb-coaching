@@ -197,6 +197,64 @@
   .pitch-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;line-height:1.1;text-transform:uppercase;color:#fff;margin:0 0 14px;}
   .pitch-title em{font-style:normal;color:var(--red);}
   .pitch-list{display:flex;flex-direction:column;gap:10px;}
+
+/* Animations du parcours par objectif */
+@keyframes finderIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes finderStep{from{opacity:0;transform:translateY(-10px) scale(.98);}to{opacity:1;transform:none;}}
+@keyframes boxPop{0%{transform:scale(.4) rotate(-20deg);}60%{transform:scale(1.35) rotate(6deg);}100%{transform:scale(1) rotate(0);}}
+@keyframes choiceGlow{0%{box-shadow:0 0 0 0 rgba(255,58,58,.55);}100%{box-shadow:0 0 0 14px rgba(255,58,58,0);}}
+@keyframes pitchIn{from{opacity:0;transform:translateY(26px) scale(.96);}to{opacity:1;transform:none;}}
+@keyframes pitchItem{from{opacity:0;transform:translateX(-18px);}to{opacity:1;transform:none;}}
+@keyframes cardPop{from{opacity:0;transform:translateY(34px) scale(.93);}to{opacity:1;transform:none;}}
+@keyframes kgPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+.finder-choice{animation:finderIn .5s cubic-bezier(.2,.8,.2,1) backwards;transition:transform .15s ease,border-color .2s ease,background .2s ease;}
+.finder-choices .finder-choice:nth-child(2){animation-delay:.1s;}
+.finder-choice:active{transform:scale(.96);}
+.finder-choice.on{animation:choiceGlow .6s ease-out;}
+.finder-choice.on .finder-box{animation:boxPop .45s cubic-bezier(.3,1.6,.5,1);}
+.finder-step:not([hidden]){animation:finderStep .45s cubic-bezier(.2,.8,.2,1) both;}
+.finder-step:not([hidden]) .finder-choice{animation:finderIn .5s cubic-bezier(.2,.8,.2,1) .15s both;}
+.finder-step:not([hidden]) .finder-choice:nth-child(2){animation-delay:.25s;}
+.finder-step:not([hidden]) .finder-choice.on{animation:choiceGlow .6s ease-out;}
+.offer-pitch.anim{animation:pitchIn .6s cubic-bezier(.2,.8,.2,1) both;}
+.offer-pitch.anim .offer-item{animation:pitchItem .45s cubic-bezier(.2,.8,.2,1) both;}
+.offer-pitch.anim .offer-item:nth-child(1){animation-delay:.25s;}
+.offer-pitch.anim .offer-item:nth-child(2){animation-delay:.4s;}
+.offer-pitch.anim .offer-item:nth-child(3){animation-delay:.55s;}
+.offer-pitch.anim .offer-item:nth-child(4){animation-delay:.7s;}
+.offer-pitch.anim .offer-item:nth-child(5){animation-delay:.85s;}
+.offer-pitch.anim .pitch-title em{display:inline-block;animation:kgPulse .7s ease .2s 1;}
+.offres-strip .offer-card{animation:cardPop .6s cubic-bezier(.2,.8,.2,1) both;}
+.offres-strip .offer-card + .offer-card{animation-delay:.15s;}
+@media (prefers-reduced-motion: reduce){
+  .finder-choice,.finder-step,.offer-pitch.anim,.offer-pitch.anim .offer-item,.offres-strip .offer-card,.finder-choice.on,.finder-choice.on .finder-box{animation:none !important;}
+}
+
+/* Parcours en volets : on glisse de gauche a droite */
+.offres-wrap{overflow-x:hidden;}
+.finder-pane{padding:0 20px 8px;}
+.finder-pane[hidden],#offerResult[hidden]{display:none;}
+.finder-back{background:none;border:none;color:rgba(255,255,255,.6);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.5px;text-transform:uppercase;padding:0 0 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.finder-reset-row{padding:0 20px;}
+.finder-choice.chosen{transform:scale(1.06);border-color:var(--red);background:rgba(255,58,58,.16);box-shadow:0 0 0 0 rgba(255,58,58,.5);}
+.finder-choice.dim{opacity:.18;transform:scale(.94);pointer-events:none;}
+.finder-choices.locked .finder-choice{pointer-events:none;}
+@keyframes paneInR{from{opacity:0;transform:translateX(60px);}to{opacity:1;transform:none;}}
+@keyframes paneInL{from{opacity:0;transform:translateX(-60px);}to{opacity:1;transform:none;}}
+@keyframes paneOutL{from{opacity:1;transform:none;}to{opacity:0;transform:translateX(-60px);}}
+@keyframes paneOutR{from{opacity:1;transform:none;}to{opacity:0;transform:translateX(60px);}}
+.pane-in-right{animation:paneInR .45s cubic-bezier(.2,.8,.2,1) backwards;}
+.pane-in-left{animation:paneInL .45s cubic-bezier(.2,.8,.2,1) backwards;}
+.pane-out-left{animation:paneOutL .3s ease-in forwards;}
+.pane-out-right{animation:paneOutR .3s ease-in forwards;}
+.offer-actions{display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:20px;}
+.offer-act{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;border:none;border-radius:100px;padding:13px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.offer-act.wa{background:#25D366;color:#0a0a0a;}
+.offer-act.wa svg{fill:#0a0a0a;}
+.offer-act.call{background:#fff;color:#0a0a0a;}
+@media (prefers-reduced-motion: reduce){
+  .pane-in-right,.pane-in-left,.pane-out-left,.pane-out-right{animation:none !important;}
+}
   .offer-empty-msg{display:none;flex-direction:column;align-items:center;gap:12px;color:#fff;font-size:0.85rem;font-weight:500;padding:4px 20px 14px;text-align:center;font-style:normal;font-family:'Barlow',sans-serif;}
   @keyframes offerArrowBounce{
     0%,100%{transform:translateY(0);opacity:0.9;}
@@ -557,26 +615,29 @@
 
 <!-- OFFRES -->
 <div class="offres-wrap" id="offres">
-  <p class="section-title">Nos Offres</p>
-  <div class="offer-filter finder" id="offerFinder">
+  <p class="section-title">Un objectif, une offre</p>
+  <div class="finder-pane" id="paneGoal">
     <p class="finder-q">Quel est ton objectif&nbsp;?</p>
     <div class="finder-choices" id="finderGoals">
       <button type="button" class="finder-choice attention" data-goal="transfo" onclick="pickGoal('transfo')"><span class="finder-box">&#10003;</span><span>Me transformer physiquement</span></button>
       <button type="button" class="finder-choice attention" data-goal="prepa" onclick="pickGoal('prepa')"><span class="finder-box">&#10003;</span><span>Devenir mon pr&eacute;parateur physique</span></button>
     </div>
-    <div class="finder-step" id="finderContext" hidden>
-      <p class="finder-q">Comment veux-tu t'entra&icirc;ner&nbsp;?</p>
-      <div class="finder-choices" id="finderModes">
-        <button type="button" class="finder-choice" data-mode="presentiel" onclick="pickMode('presentiel')"><span class="finder-box">&#10003;</span><span>En pr&eacute;sentiel</span></button>
-        <button type="button" class="finder-choice" data-mode="ligne" onclick="pickMode('ligne')"><span class="finder-box">&#10003;</span><span>En ligne</span></button>
-      </div>
+  </div>
+  <div class="finder-pane" id="paneMode" hidden>
+    <button type="button" class="finder-back" onclick="backToGoal()">&larr; Retour</button>
+    <p class="finder-q">Comment veux-tu t'entra&icirc;ner&nbsp;?</p>
+    <div class="finder-choices" id="finderModes">
+      <button type="button" class="finder-choice" data-mode="presentiel" onclick="pickMode('presentiel')"><span class="finder-box">&#10003;</span><span>En pr&eacute;sentiel</span></button>
+      <button type="button" class="finder-choice" data-mode="ligne" onclick="pickMode('ligne')"><span class="finder-box">&#10003;</span><span>En ligne</span></button>
     </div>
   </div>
-  <p class="offer-empty-msg" id="offerEmptyMsg"><svg class="offer-empty-arrow" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 30V3M12 3L3 13M12 3L21 13" stroke="#ff3a3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>R&eacute;ponds aux questions ci-dessus pour d&eacute;couvrir l'offre qui te correspond.</p>
+
+  <div id="offerResult" hidden>
+  <div class="finder-reset-row"><button type="button" class="finder-back" onclick="finderReset()">&larr; Modifier mes choix</button></div>
 
   <div class="offer-pitch" id="offerPitch" hidden>
     <p class="pitch-kicker">Transformation physique</p>
-    <p class="pitch-title">Perds jusqu'&agrave; <em>12&nbsp;kg</em> en 12&nbsp;semaines</p>
+    <p class="pitch-title">Perds jusqu'&agrave; <em><span id="pitchKg">12</span>&nbsp;kg</em> en 12&nbsp;semaines</p>
     <div class="pitch-list">
       <div class="offer-item"><span class="check">&#10003;</span><span><b>Des kilos que tu ne reprends pas&nbsp;:</b> gr&acirc;ce &agrave; mon exp&eacute;rience, c'est un vrai r&eacute;&eacute;quilibrage alimentaire, pas un r&eacute;gime.</span></div>
       <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s &agrave; mon application <b>MB App</b>.</span></div>
@@ -601,21 +662,13 @@
           </div>
         </div>
         <p class="offer-price-note">Soit 1&nbsp;647&euro; pour 6 mois (au lieu de 3&nbsp;294&euro;)<br>Paiement mensuel accept&eacute;</p>
-        <div class="offer-list">
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan initial</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances one-to-one par mois</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement personnalis&eacute;</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Accompagnement nutritionnel</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi hebdomadaire</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi poids / mensurations / photos</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Application MB Coaching</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Ajustement du programme</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp quotidiens</span></div>
-        </div>
         <div class="sap-notice">
           <p class="sap-notice-text">Ce tarif int&egrave;gre d&eacute;j&agrave; la <b>r&eacute;duction d'imp&ocirc;t de 50%</b> li&eacute;e au dispositif Services &agrave; la Personne. Pas d'avance de frais, pas de d&eacute;marche suppl&eacute;mentaire.</p>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Coaching%20en%20pr%C3%A9sentiel%20-%20%C3%A0%20domicile%20%286%20mois%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
+        </div>
       </div>
     </div>
 
@@ -627,18 +680,10 @@
         <div class="offer-divider"></div>
         <div class="offer-price"><span class="amt">549&euro;</span><span class="unit">/mois</span></div>
         <p class="offer-price-note">Soit 3&nbsp;294&euro; pour 6 mois<br>Paiement mensuel accept&eacute;</p>
-        <div class="offer-list">
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan initial</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances one-to-one par mois</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement personnalis&eacute;</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Accompagnement nutritionnel</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi hebdomadaire</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Suivi poids / mensurations / photos</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Application MB Coaching</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Ajustement du programme</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp quotidiens</span></div>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Coaching%20en%20pr%C3%A9sentiel%20-%20en%20salle%20%286%20mois%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
       </div>
     </div>
 
@@ -649,15 +694,10 @@
         <div class="offer-divider"></div>
         <div class="offer-price"><span class="amt">497&euro;</span></div>
         <p class="offer-price-note">Tarif pour 12 semaines</p>
-        <div class="offer-list">
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan de d&eacute;part (objectifs, sant&eacute;, historique, mat&eacute;riel dispo)</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement sur mesure, salle ou maison</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Plan alimentaire adapt&eacute; &agrave; ton budget et &agrave; tes go&ucirc;ts, avec liste de courses</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan hebdo (poids, ressenti, &eacute;nergie) et ajustement du programme</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp quotidiens avec ton coach</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s &agrave; l'app MB Coaching</span></div>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Starter%20transfo%20%2812%20semaines%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
       </div>
     </div>
 
@@ -669,15 +709,10 @@
         <div class="offer-divider"></div>
         <div class="offer-price"><span class="amt">897&euro;</span></div>
         <p class="offer-price-note">ou 3&nbsp;&times;&nbsp;299&euro;</p>
-        <div class="offer-list">
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan de d&eacute;part (objectifs, sant&eacute;, historique, mat&eacute;riel dispo)</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement sur mesure, salle ou maison</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Plan alimentaire adapt&eacute; &agrave; ton budget et &agrave; tes go&ucirc;ts, avec liste de courses</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Bilan hebdo (poids, ressenti, &eacute;nergie) et ajustement du programme</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp quotidiens avec ton coach</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s &agrave; l'app MB Coaching</span></div>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Premium%20transfo%20%286%20mois%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
       </div>
     </div>
 
@@ -702,7 +737,10 @@
           <div class="offer-item"><span class="check">&#10003;</span><span>Ajustements du programme</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilan final</span></div>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Pr%C3%A9-saison%20Performance%20%288%20semaines%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
+        </div>
       </div>
     </div>
 
@@ -732,7 +770,10 @@
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilans interm&eacute;diaires</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilan de fin de saison</span></div>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Saison%20Performance%20%28Accompagnement%20annuel%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
+        </div>
       </div>
     </div>
 
@@ -785,7 +826,10 @@
         <div class="sap-notice">
           <p class="sap-notice-text">Ce tarif int&egrave;gre d&eacute;j&agrave; la <b>r&eacute;duction d'imp&ocirc;t de 50%</b> li&eacute;e au dispositif Services &agrave; la Personne. Pas d'avance de frais, pas de d&eacute;marche suppl&eacute;mentaire.</p>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Essentiel" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
+        </div>
       </div>
     </div>
 
@@ -815,10 +859,14 @@
         <div class="sap-notice">
           <p class="sap-notice-text">Ce tarif int&egrave;gre d&eacute;j&agrave; la <b>r&eacute;duction d'imp&ocirc;t de 50%</b> li&eacute;e au dispositif Services &agrave; la Personne. Pas d'avance de frais, pas de d&eacute;marche suppl&eacute;mentaire.</p>
         </div>
-        <button class="offer-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Plus d'informations</button>
+        <div class="offer-actions">
+          <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Premium" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
+        </div>
       </div>
     </div>
 
+  </div>
   </div>
 </div>
 <!-- MON STUDIO -->
@@ -1010,42 +1058,105 @@
   }
 
 
-  // Parcours par objectif : objectif -> contexte -> offre
-  var finderState = {goal:null, mode:null};
-  function markChoices(containerId, attr, value){
-    var c = document.getElementById(containerId);
-    if (!c) return;
+  // Parcours par objectif : objectif -> contexte -> offre (volets qui glissent)
+  var finderState = {goal:null, mode:null, busy:false};
+  function byId(i){ return document.getElementById(i); }
+  function clearChoices(id){
+    var c = byId(id); if (!c) return;
+    c.classList.remove('locked');
+    c.querySelectorAll('.finder-choice').forEach(function(b){ b.classList.remove('on','chosen','dim'); });
+  }
+  function markPicked(containerId, attr, value){
+    var c = byId(containerId); if (!c) return;
+    c.classList.add('locked');
     c.querySelectorAll('.finder-choice').forEach(function(b){
-      b.classList.toggle('on', b.getAttribute(attr) === value);
+      var me = b.getAttribute(attr) === value;
       b.classList.remove('attention');
+      b.classList.toggle('on', me);
+      b.classList.toggle('chosen', me);
+      b.classList.toggle('dim', !me);
     });
   }
+  function swapPane(outEl, inEl, forward, after){
+    outEl.classList.add(forward ? 'pane-out-left' : 'pane-out-right');
+    setTimeout(function(){
+      outEl.hidden = true;
+      outEl.classList.remove('pane-out-left','pane-out-right');
+      inEl.hidden = false;
+      inEl.classList.remove('pane-in-right','pane-in-left');
+      void inEl.offsetWidth;
+      inEl.classList.add(forward ? 'pane-in-right' : 'pane-in-left');
+      finderState.busy = false;
+      if (after) after();
+    }, 300);
+  }
   function pickGoal(goal){
-    finderState.goal = goal;
-    finderState.mode = null;
-    markChoices('finderGoals','data-goal',goal);
-    markChoices('finderModes','data-mode',null);
-    var ctx = document.getElementById('finderContext');
-    if (ctx) ctx.hidden = (goal !== 'transfo');
-    updateFinder();
+    if (finderState.busy) return;
+    finderState.busy = true;
+    finderState.goal = goal; finderState.mode = null;
+    markPicked('finderGoals','data-goal',goal);
+    setTimeout(function(){
+      if (goal === 'prepa') showResult(byId('paneGoal'));
+      else swapPane(byId('paneGoal'), byId('paneMode'), true);
+    }, 550);
   }
   function pickMode(mode){
+    if (finderState.busy) return;
+    finderState.busy = true;
     finderState.mode = mode;
-    markChoices('finderModes','data-mode',mode);
-    updateFinder();
+    markPicked('finderModes','data-mode',mode);
+    setTimeout(function(){ showResult(byId('paneMode')); }, 550);
   }
-  function updateFinder(){
+  function backToGoal(){
+    if (finderState.busy) return;
+    finderState.busy = true;
+    finderState.goal = null; finderState.mode = null;
+    clearChoices('finderGoals'); clearChoices('finderModes');
+    swapPane(byId('paneMode'), byId('paneGoal'), false);
+  }
+  function finderReset(){
+    if (finderState.busy) return;
+    finderState.busy = true;
+    finderState.goal = null; finderState.mode = null;
+    clearChoices('finderGoals'); clearChoices('finderModes');
+    filterOffers('');
+    swapPane(byId('offerResult'), byId('paneGoal'), false);
+  }
+  function showResult(fromPane){
     var g = finderState.goal, m = finderState.mode, type = '';
     if (g === 'prepa') type = 'preparation';
     else if (g === 'transfo' && m) type = (m === 'presentiel') ? 'suivi' : 'distance';
-    var pitch = document.getElementById('offerPitch');
+    var pitch = byId('offerPitch');
     if (pitch){
       pitch.hidden = !(g === 'transfo' && m);
+      pitch.classList.remove('anim');
       pitch.querySelectorAll('.pitch-presentiel').forEach(function(el){
         el.style.display = (m === 'presentiel') ? '' : 'none';
       });
     }
     filterOffers(type);
+    swapPane(fromPane, byId('offerResult'), true, function(){
+      if (pitch && !pitch.hidden){
+        void pitch.offsetWidth;
+        pitch.classList.add('anim');
+        countUpKg();
+      }
+    });
+  }
+  // Compteur anime des kilos
+  function countUpKg(){
+    var el = byId('pitchKg');
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = '12'; return; }
+    var start = null, dur = 900;
+    function step(ts){
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 12);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    el.textContent = '0';
+    requestAnimationFrame(step);
   }
 
   // Fiche orientation : impression depuis la pop-up
