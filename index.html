@@ -180,6 +180,23 @@
   }
   .offer-filter-select.attention{animation:offerPulse 1.8s ease-out infinite;}
   .offer-filter-select:focus{outline:none;border-color:var(--red);}
+
+  /* Parcours par objectif */
+  .finder{padding:0 20px 8px;}
+  .finder-q{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:0.4px;color:#fff;margin:0 0 10px;}
+  .finder-step{margin-top:20px;}
+  .finder-step[hidden]{display:none;}
+  .finder-choices{display:flex;flex-direction:column;gap:10px;}
+  .finder-choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:1.5px solid rgba(255,255,255,0.25);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:0.4px;padding:14px 16px;border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s ease,background .15s ease;}
+  .finder-box{flex:0 0 22px;width:22px;height:22px;border:1.5px solid rgba(255,255,255,0.45);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;line-height:1;color:transparent;transition:background .15s ease,border-color .15s ease;}
+  .finder-choice.on{border-color:var(--red);background:rgba(255,58,58,0.08);}
+  .finder-choice.on .finder-box{background:var(--red);border-color:var(--red);color:#fff;}
+  .offer-pitch{margin:6px 20px 0;padding:20px 18px;border:1.5px solid var(--red-dim);border-radius:14px;background:rgba(255,58,58,0.05);}
+  .offer-pitch[hidden]{display:none;}
+  .pitch-kicker{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--red);margin:0 0 6px;}
+  .pitch-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;line-height:1.1;text-transform:uppercase;color:#fff;margin:0 0 14px;}
+  .pitch-title em{font-style:normal;color:var(--red);}
+  .pitch-list{display:flex;flex-direction:column;gap:10px;}
   .offer-empty-msg{display:none;flex-direction:column;align-items:center;gap:12px;color:#fff;font-size:0.85rem;font-weight:500;padding:4px 20px 14px;text-align:center;font-style:normal;font-family:'Barlow',sans-serif;}
   @keyframes offerArrowBounce{
     0%,100%{transform:translateY(0);opacity:0.9;}
@@ -541,15 +558,33 @@
 <!-- OFFRES -->
 <div class="offres-wrap" id="offres">
   <p class="section-title">Nos Offres</p>
-  <div class="offer-filter">
-    <select class="offer-filter-select attention" id="offerFilterSelect" onchange="filterOffers(this.value)">
-      <option value="" selected disabled>Sélectionnez une offre</option>
-      <option value="suivi">Coaching en présentiel</option>
-      <option value="distance">Coaching à distance</option>
-      <option value="preparation">Préparation athlétique</option>
-    </select>
+  <div class="offer-filter finder" id="offerFinder">
+    <p class="finder-q">Quel est ton objectif&nbsp;?</p>
+    <div class="finder-choices" id="finderGoals">
+      <button type="button" class="finder-choice attention" data-goal="transfo" onclick="pickGoal('transfo')"><span class="finder-box">&#10003;</span><span>Me transformer physiquement</span></button>
+      <button type="button" class="finder-choice attention" data-goal="prepa" onclick="pickGoal('prepa')"><span class="finder-box">&#10003;</span><span>Devenir mon pr&eacute;parateur physique</span></button>
+    </div>
+    <div class="finder-step" id="finderContext" hidden>
+      <p class="finder-q">Comment veux-tu t'entra&icirc;ner&nbsp;?</p>
+      <div class="finder-choices" id="finderModes">
+        <button type="button" class="finder-choice" data-mode="presentiel" onclick="pickMode('presentiel')"><span class="finder-box">&#10003;</span><span>En pr&eacute;sentiel</span></button>
+        <button type="button" class="finder-choice" data-mode="ligne" onclick="pickMode('ligne')"><span class="finder-box">&#10003;</span><span>En ligne</span></button>
+      </div>
+    </div>
   </div>
-  <p class="offer-empty-msg" id="offerEmptyMsg"><svg class="offer-empty-arrow" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 30V3M12 3L3 13M12 3L21 13" stroke="#ff3a3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>S&eacute;lectionnez une option ci-dessus pour afficher les offres.</p>
+  <p class="offer-empty-msg" id="offerEmptyMsg"><svg class="offer-empty-arrow" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 30V3M12 3L3 13M12 3L21 13" stroke="#ff3a3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>R&eacute;ponds aux questions ci-dessus pour d&eacute;couvrir l'offre qui te correspond.</p>
+
+  <div class="offer-pitch" id="offerPitch" hidden>
+    <p class="pitch-kicker">Transformation physique</p>
+    <p class="pitch-title">Perds jusqu'&agrave; <em>12&nbsp;kg</em> en 12&nbsp;semaines</p>
+    <div class="pitch-list">
+      <div class="offer-item"><span class="check">&#10003;</span><span><b>Des kilos que tu ne reprends pas&nbsp;:</b> gr&acirc;ce &agrave; mon exp&eacute;rience, c'est un vrai r&eacute;&eacute;quilibrage alimentaire, pas un r&eacute;gime.</span></div>
+      <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s &agrave; mon application <b>MB App</b>.</span></div>
+      <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement et programme alimentaire qui s'adaptent &agrave; tes besoins, ta sant&eacute; et tes obligations professionnelles.</span></div>
+      <div class="offer-item"><span class="check">&#10003;</span><span>Une offre <b>100&nbsp;% personnalis&eacute;e</b>.</span></div>
+      <div class="offer-item pitch-presentiel"><span class="check">&#10003;</span><span><b>2 &agrave; 4 s&eacute;ances en one-to-one</b> avec moi.</span></div>
+    </div>
+  </div>
 
   <div class="offres-strip">
     <div class="offer-card" data-type="suivi">
@@ -568,7 +603,7 @@
         <p class="offer-price-note">Soit 1&nbsp;647&euro; pour 6 mois (au lieu de 3&nbsp;294&euro;)<br>Paiement mensuel accept&eacute;</p>
         <div class="offer-list">
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilan initial</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances par mois</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances one-to-one par mois</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement personnalis&eacute;</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Accompagnement nutritionnel</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Suivi hebdomadaire</span></div>
@@ -594,7 +629,7 @@
         <p class="offer-price-note">Soit 3&nbsp;294&euro; pour 6 mois<br>Paiement mensuel accept&eacute;</p>
         <div class="offer-list">
           <div class="offer-item"><span class="check">&#10003;</span><span>Bilan initial</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances par mois</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>2 &agrave; 4 s&eacute;ances one-to-one par mois</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement personnalis&eacute;</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Accompagnement nutritionnel</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Suivi hebdomadaire</span></div>
@@ -951,7 +986,7 @@
 </div>
 
 <script>
-  // Filtre des offres (À la séance / Avec suivi / Préparation athlétique) via liste déroulante
+  // Filtre des offres (présentiel / à distance / préparation athlétique)
   function filterOffers(type){
     var emptyMsg = document.getElementById('offerEmptyMsg');
     var cards = document.querySelectorAll('.offer-card');
@@ -972,6 +1007,45 @@
     if (strip) strip.scrollLeft = 0;
     var select = document.getElementById('offerFilterSelect');
     if (select) select.classList.remove('attention');
+  }
+
+
+  // Parcours par objectif : objectif -> contexte -> offre
+  var finderState = {goal:null, mode:null};
+  function markChoices(containerId, attr, value){
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.finder-choice').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute(attr) === value);
+      b.classList.remove('attention');
+    });
+  }
+  function pickGoal(goal){
+    finderState.goal = goal;
+    finderState.mode = null;
+    markChoices('finderGoals','data-goal',goal);
+    markChoices('finderModes','data-mode',null);
+    var ctx = document.getElementById('finderContext');
+    if (ctx) ctx.hidden = (goal !== 'transfo');
+    updateFinder();
+  }
+  function pickMode(mode){
+    finderState.mode = mode;
+    markChoices('finderModes','data-mode',mode);
+    updateFinder();
+  }
+  function updateFinder(){
+    var g = finderState.goal, m = finderState.mode, type = '';
+    if (g === 'prepa') type = 'preparation';
+    else if (g === 'transfo' && m) type = (m === 'presentiel') ? 'suivi' : 'distance';
+    var pitch = document.getElementById('offerPitch');
+    if (pitch){
+      pitch.hidden = !(g === 'transfo' && m);
+      pitch.querySelectorAll('.pitch-presentiel').forEach(function(el){
+        el.style.display = (m === 'presentiel') ? '' : 'none';
+      });
+    }
+    filterOffers(type);
   }
 
   // Fiche orientation : impression depuis la pop-up
