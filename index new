@@ -707,7 +707,7 @@
         </div>
         <p class="offer-duration">Mensuel</p>
         <p class="offer-ttc">Prix TTC + Facture</p>
-        <p class="offer-guarantee">R&eacute;sultats garantis ou rembours&eacute;*</p>
+        <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Coaching%20en%20pr%C3%A9sentiel%20-%20%C3%A0%20domicile" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
@@ -723,7 +723,7 @@
         <div class="offer-price"><span class="amt">549&euro;</span><span class="unit">/mois</span></div>
         <p class="offer-duration">Mensuel</p>
         <p class="offer-ttc">Prix TTC + Facture</p>
-        <p class="offer-guarantee">R&eacute;sultats garantis ou rembours&eacute;*</p>
+        <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Coaching%20en%20pr%C3%A9sentiel%20-%20en%20salle" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
@@ -738,7 +738,7 @@
         <div class="offer-price"><span class="amt">497&euro;</span></div>
         <p class="offer-duration">12 semaines (3 mois)</p>
         <p class="offer-ttc">Prix TTC + Facture</p>
-        <p class="offer-guarantee">R&eacute;sultats garantis ou rembours&eacute;*</p>
+        <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Starter%20transfo%20%2812%20semaines%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
@@ -754,7 +754,7 @@
         <div class="offer-price"><span class="amt">897&euro;</span><span class="offer-price-alt">ou 3&nbsp;&times;&nbsp;299&euro;</span></div>
         <p class="offer-duration">6 mois</p>
         <p class="offer-ttc">Prix TTC + Facture</p>
-        <p class="offer-guarantee">R&eacute;sultats garantis ou rembours&eacute;*</p>
+        <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33743798622?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Premium%20transfo%20%286%20mois%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
