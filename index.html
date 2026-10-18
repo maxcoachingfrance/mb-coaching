@@ -88,6 +88,30 @@
   }
   .menu-close{position:absolute;top:20px;right:22px;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;}
 
+  /* POPUP FLYER (ouverte uniquement depuis le menu ou via mbimbeau.fr/#bilan) */
+  .flyer-pop{
+    position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0.8);
+    display:none;align-items:center;justify-content:center;padding:16px;
+  }
+  .flyer-pop.open{display:flex;}
+  .flyer-sheet{
+    position:relative;width:100%;max-width:460px;height:88vh;height:88svh;max-height:860px;
+    background:#070707;border-radius:20px;overflow:hidden;
+    border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  }
+  .flyer-sheet iframe{width:100%;height:100%;border:0;display:block;background:#070707;}
+  .flyer-close{
+    position:absolute;top:10px;right:10px;z-index:2;width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,0.95);color:#0a0a0a;border:none;cursor:pointer;
+    font-size:1.1rem;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.4);
+  }
+  .flyer-close:focus-visible{outline:3px solid var(--red);outline-offset:2px;}
+  @media (max-width:520px){
+    .flyer-pop{padding:0;}
+    .flyer-sheet{max-width:none;height:100%;max-height:none;border-radius:0;border:none;}
+  }
+
   /* HERO */
   .hero{
     position:relative;
@@ -566,6 +590,7 @@
   <a href="#qui-je-suis" onclick="document.getElementById('menu').classList.remove('open')">Qui je suis</a>
   <a href="#faq" onclick="document.getElementById('menu').classList.remove('open')">FAQ</a>
   <a href="#contact" onclick="document.getElementById('menu').classList.remove('open')">Contact</a>
+  <a href="#bilan" onclick="document.getElementById('menu').classList.remove('open');openFlyer();return false;">Flyer</a>
 </div>
 
 <div class="topbar">
@@ -1445,6 +1470,55 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeroTitles);
   document.addEventListener('DOMContentLoaded', fitHeroTitles);
 })();
+</script>
+<div class="flyer-pop" id="flyerPop" role="dialog" aria-modal="true" aria-label="Flyer MB Coaching" onclick="if(event.target===this)closeFlyer()">
+  <div class="flyer-sheet">
+    <button class="flyer-close" type="button" onclick="closeFlyer()" aria-label="Fermer">✕</button>
+    <iframe id="flyerFrame" title="Réserver un bilan"></iframe>
+  </div>
+</div>
+<script>
+  (function(){
+    var FLYER_URL = 'bilan.html?src=site';
+    var pop = document.getElementById('flyerPop');
+    var frame = document.getElementById('flyerFrame');
+    var lastFocus = null;
+
+    window.openFlyer = function(){
+      if(!frame.getAttribute('src')){
+        // Transmet les paramètres d'annonce (gclid…) à la page bilan
+        var q = location.search ? '&' + location.search.slice(1) : '';
+        frame.setAttribute('src', FLYER_URL + q);
+      }
+      lastFocus = document.activeElement;
+      pop.classList.add('open');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      if(location.hash !== '#bilan'){ history.replaceState(null,'',location.pathname + location.search + '#bilan'); }
+      pop.querySelector('.flyer-close').focus();
+    };
+
+    window.closeFlyer = function(){
+      pop.classList.remove('open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      if(location.hash === '#bilan'){ history.replaceState(null,'',location.pathname + location.search); }
+      if(lastFocus && lastFocus.focus){ lastFocus.focus(); }
+    };
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && pop.classList.contains('open')) closeFlyer();
+    });
+    window.addEventListener('hashchange', function(){
+      if(location.hash === '#bilan') openFlyer();
+    });
+    if(location.hash === '#bilan'){
+      // Lien direct mbimbeau.fr/#bilan : ouvre la popup sans faire défiler la page
+      if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0,0);
+      openFlyer();
+    }
+  })();
 </script>
 </body>
 </html>
