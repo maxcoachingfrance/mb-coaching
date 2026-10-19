@@ -344,13 +344,27 @@
     }
   })();
 
-  // Bilans : du lundi au samedi, de 10:00 à 18:30, sur les 7 prochains jours
+  // Bilans : du lundi au samedi, de 10:00 à 18:30
+  // Premier créneau possible selon le moment de la demande :
+  // - en semaine avant 10 h : le soir même à partir de 18 h
+  // - en semaine après 10 h : au moins 18 h plus tard
+  // - vendredi à partir de 18 h ou samedi : lundi à partir de 10 h
+  // - dimanche : lundi à partir de 18 h
+  function earliestBilan(now){
+    var d = now.getDay(), h = now.getHours() + now.getMinutes()/60;
+    function at(daysAhead, hour){ var x = new Date(now); x.setDate(x.getDate() + daysAhead); x.setHours(hour, 0, 0, 0); return x.getTime(); }
+    if (d === 0) return at(1, 18);
+    if (d === 6) return at(2, 10);
+    if (d === 5 && h >= 18) return at(3, 10);
+    if (h < 10) return at(0, 18);
+    return now.getTime() + 18*3600000;
+  }
   function slotsFor(d){
-    var out = [], now = new Date(), isToday = d.toDateString() === now.toDateString();
-    var minTime = now.getTime() + 60*60*1000; // au moins 1 h de délai
+    var out = [], now = new Date();
+    var minTime = earliestBilan(now);
     for (var m = 10*60; m <= 18*60+30; m += 30){
       var t = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(m/60), m%60);
-      if (isToday && t.getTime() < minTime) continue;
+      if (t.getTime() < minTime) continue;
       out.push(String(t.getHours()).padStart(2,'0') + ':' + String(t.getMinutes()).padStart(2,'0'));
     }
     return out;
@@ -360,10 +374,10 @@
     var MOIS = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
     var sel = document.getElementById('cbDay'); sel.innerHTML = '';
     var base = new Date(); base.setHours(0,0,0,0);
-    for (var i = 1; i < 9 && sel.options.length < 6; i++){ // à partir de demain, jamais le jour même
+    for (var i = 0; i < 10 && sel.options.length < 6; i++){
       var d = new Date(base); d.setDate(base.getDate() + i);
       if (d.getDay() === 0 || !slotsFor(d).length) continue;
-      var label = (i === 1 ? 'Demain' : JOURS[d.getDay()]) + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()];
+      var label = (i === 0 ? 'Aujourd’hui' : i === 1 ? 'Demain' : JOURS[d.getDay()]) + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()];
       var opt = document.createElement('option');
       opt.value = JOURS[d.getDay()] + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()];
       opt.textContent = label; opt.dataset.iso = d.toISOString();
