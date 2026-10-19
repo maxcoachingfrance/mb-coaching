@@ -281,7 +281,25 @@
 /* Duree sous le tarif, TTC et garantie : centres */
 .offer-card .offer-price{justify-content:center;text-align:center;}
 .offer-duration{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:.5px;text-transform:uppercase;color:#fff;margin:-8px 0 4px;line-height:1.15;}
-.offer-duration-sub{text-align:center;font-size:1rem;font-weight:600;color:rgba(255,255,255,.75);margin:0 0 4px;}
+.offer-duration-sub{text-align:center;font-size:1rem;font-weight:600;color:rgba(255,255,255,.75);margin:0 0 4px;}.cfg{margin:4px 0 8px;display:flex;flex-direction:column;gap:10px;}
+.cfg-lab{display:block;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:1.3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;}
+.cfg-seg{position:relative;display:flex;padding:3px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);}
+.cfg-seg button{position:relative;z-index:1;flex:1;min-width:0;border:0;background:none;cursor:pointer;color:rgba(255,255,255,.72);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.4px;line-height:1;padding:9px 4px;border-radius:999px;white-space:nowrap;transition:color .35s ease;-webkit-tap-highlight-color:transparent;}
+.cfg-seg button.on{color:#0a0a0a;}
+.cfg-seg button em{display:block;font-style:normal;font-size:.66rem;font-weight:600;letter-spacing:.2px;color:#ff3a3a;margin-top:4px;transition:color .35s ease;}.cfg-seg button em:first-letter{text-transform:none;}
+.cfg-seg button.on em{color:#d10f0f;}
+.cfg-seg button:focus-visible{outline:2px solid #ff3a3a;outline-offset:2px;}
+.cfg-pill{position:absolute;z-index:0;top:3px;bottom:3px;left:0;width:0;border-radius:999px;background:#fff;box-shadow:0 6px 18px rgba(255,58,58,.28);transition:transform .5s cubic-bezier(.22,1,.36,1),width .5s cubic-bezier(.22,1,.36,1);}
+.cfg-desc{text-align:center;padding:12px 12px 10px;border-radius:14px;background:linear-gradient(180deg,rgba(255,58,58,.12),rgba(255,58,58,.03));border:1px solid rgba(255,58,58,.28);min-height:8.4em;box-sizing:border-box;transition:opacity .3s ease,transform .3s ease;}.cfg-desc.swap{opacity:0;transform:translateY(5px);}.cfg-tf{position:relative;margin:-4px -4px 10px;border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:#141414;transition:opacity .3s ease;}.cfg-tf.swap{opacity:0;}.cfg-tf img{width:100%;height:100%;object-fit:cover;display:block;}.cfg-tf-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 8px 7px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;line-height:1.15;letter-spacing:.5px;white-space:nowrap;text-transform:uppercase;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.85));text-align:center;}.cfg-tf-cap b{color:#ff3a3a;}.cfg-tf-sub{display:block;font-size:.74rem;font-weight:700;letter-spacing:.2px;opacity:.85;margin-top:2px;}
+.cfg-desc-t{margin:0 0 5px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.02rem;line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:#fff;white-space:nowrap;}.cfg-desc-t span{color:#ff3a3a;}.cfg-desc-t b{font-weight:800;}.cfg-desc-x{margin:0;font-size:.8rem;line-height:1.4;color:rgba(255,255,255,.78);}
+.cfg-note{text-align:center;font-size:.8rem;line-height:1.35;color:rgba(255,255,255,.72);min-height:4.1em;margin:0;transition:opacity .3s ease,transform .3s ease;}
+.cfg-note.swap{opacity:0;transform:translateY(4px);}
+.cfg-note b{color:#fff;}
+.offer-sap-old,.offer-sap-new,.offer-price .amt{display:inline-block;}
+.price-bump{animation:priceBump .55s cubic-bezier(.22,1,.36,1);}
+@keyframes priceBump{0%{transform:scale(1);}35%{transform:scale(1.07);color:#ff3a3a;}100%{transform:scale(1);}}
+@media (prefers-reduced-motion:reduce){.cfg-pill,.cfg-note{transition:none;}.price-bump{animation:none;}}
+.offer-duration-sub.sm{font-size:.85rem;white-space:nowrap;margin:0 0 2px;}.offer-opt{display:block;width:max-content;max-width:100%;margin:8px auto 4px;padding:6px 16px;border:1.5px solid #ff3a3a;border-radius:14px;font-size:.82rem;font-weight:700;line-height:1.35;color:#fff;white-space:nowrap;text-align:center;}
 .offer-ttc{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:6px 0 4px;}
 .offer-ttc.last{margin-bottom:20px;}
 .offer-sap-highlight + .offer-duration{margin-top:14px;}
@@ -713,7 +731,7 @@
       <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s &agrave; mon application <b>MB App</b>.</span></div>
       <div class="offer-item"><span class="check">&#10003;</span><span>Programme d'entra&icirc;nement et programme alimentaire qui s'adaptent &agrave; vos besoins, votre sant&eacute; et vos obligations professionnelles.</span></div>
       <div class="offer-item"><span class="check">&#10003;</span><span>Une offre <b>100&nbsp;% personnalis&eacute;e</b>.</span></div>
-      <div class="offer-item pitch-presentiel"><span class="check">&#10003;</span><span><b>2 &agrave; 4 s&eacute;ances en one-to-one</b> avec moi.</span></div>
+      <div class="offer-item pitch-presentiel"><span class="check">&#10003;</span><span><b>1, 2 ou 3 s&eacute;ances en one-to-one par semaine</b> avec moi, sur <b>3, 6 ou 12 mois</b> : plus l&rsquo;engagement est long, plus le prix baisse.</span></div>
     </div>
   </div>
 
@@ -730,7 +748,14 @@
             <span class="offer-sap-unit">R&eacute;duction imm&eacute;diate /mois</span>
           </div>
         </div>
-        <p class="offer-duration">Mensuel</p>
+        <div class="cfg" data-cfg="dom" data-label="Coaching à domicile" data-prices='{"1":[549,499,449],"2":[949,899,849],"3":[1299,1249,1199]}'>
+          <div class="cfg-row"><span class="cfg-lab">S&eacute;ances par semaine</span>
+            <div class="cfg-seg" role="radiogroup" aria-label="S&eacute;ances par semaine"><i class="cfg-pill" aria-hidden="true"></i><button type="button" class="on" role="radio" aria-checked="true" data-k="f" data-v="1">1</button><button type="button" role="radio" aria-checked="false" data-k="f" data-v="2">2</button><button type="button" role="radio" aria-checked="false" data-k="f" data-v="3">3</button></div></div>
+          <div class="cfg-row"><span class="cfg-lab">Engagement</span>
+            <div class="cfg-seg" role="radiogroup" aria-label="Engagement"><i class="cfg-pill" aria-hidden="true"></i><button type="button" class="on" role="radio" aria-checked="true" data-k="d" data-v="3">3 mois<em>sans remise</em></button><button type="button" role="radio" aria-checked="false" data-k="d" data-v="6">6 mois<em>&minus;50&euro;/mois</em></button><button type="button" role="radio" aria-checked="false" data-k="d" data-v="12">12 mois<em>&minus;100&euro;/mois</em></button></div></div>
+          <div class="cfg-desc"><figure class="cfg-tf" hidden><img alt="" loading="lazy"><figcaption class="cfg-tf-cap"></figcaption></figure><p class="cfg-desc-t"></p><p class="cfg-desc-x"></p></div>
+          <p class="cfg-note"></p>
+        </div>
         <p class="offer-ttc">Prix TTC + Facture</p>
         <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
@@ -745,8 +770,15 @@
         <p class="offer-featured-tag">La plus vendue</p>
         <p class="offer-title">Coaching en salle</p>
         <div class="offer-divider"></div>
-        <div class="offer-price"><span class="amt">549&euro;</span><span class="unit">/mois</span></div>
-        <p class="offer-duration">Mensuel</p>
+        <div class="offer-price"><span class="amt">399&euro;</span><span class="unit">/mois</span></div>
+        <div class="cfg" data-cfg="salle" data-label="Coaching en salle" data-prices='{"1":[399,349,299],"2":[699,649,599],"3":[949,899,849]}'>
+          <div class="cfg-row"><span class="cfg-lab">S&eacute;ances par semaine</span>
+            <div class="cfg-seg" role="radiogroup" aria-label="S&eacute;ances par semaine"><i class="cfg-pill" aria-hidden="true"></i><button type="button" class="on" role="radio" aria-checked="true" data-k="f" data-v="1">1</button><button type="button" role="radio" aria-checked="false" data-k="f" data-v="2">2</button><button type="button" role="radio" aria-checked="false" data-k="f" data-v="3">3</button></div></div>
+          <div class="cfg-row"><span class="cfg-lab">Engagement</span>
+            <div class="cfg-seg" role="radiogroup" aria-label="Engagement"><i class="cfg-pill" aria-hidden="true"></i><button type="button" class="on" role="radio" aria-checked="true" data-k="d" data-v="3">3 mois<em>sans remise</em></button><button type="button" role="radio" aria-checked="false" data-k="d" data-v="6">6 mois<em>&minus;50&euro;/mois</em></button><button type="button" role="radio" aria-checked="false" data-k="d" data-v="12">12 mois<em>&minus;100&euro;/mois</em></button></div></div>
+          <div class="cfg-desc"><figure class="cfg-tf" hidden><img alt="" loading="lazy"><figcaption class="cfg-tf-cap"></figcaption></figure><p class="cfg-desc-t"></p><p class="cfg-desc-x"></p></div>
+          <p class="cfg-note"></p>
+        </div>
         <p class="offer-ttc">Prix TTC + Facture</p>
         <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
@@ -923,7 +955,9 @@
           <div class="offer-item"><span class="check">&#10003;</span><span>Aide &agrave; l'autonomie</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Acc&egrave;s MB Coaching App</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>&Eacute;changes WhatsApp</span></div>
-          <div class="offer-item"><span class="check">&#10003;</span><span>4 s&eacute;ances par mois</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>1 s&eacute;ance one-to-one par semaine</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Options 2 ou 3 s&eacute;ances/semaine</span></div>
+          <div class="offer-item"><span class="check">&#10003;</span><span>Engagement 3, 6 ou 12 mois, avec remise</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Programme personnalis&eacute;</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Accompagnement nutritionnel</span></div>
           <div class="offer-item"><span class="check">&#10003;</span><span>Suivi et ajustement hebdomadaire</span></div>
@@ -1014,7 +1048,7 @@
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span class="txt">Puis-je annuler à tout moment ?</span><span class="plus">+</span>
     </div>
-    <div class="faq-a"><p>Oui, aucun engagement long terme sur les formules à la séance.</p></div>
+    <div class="faq-a"><p>Les formules en présentiel demandent un engagement de <b>3 mois minimum</b> : c’est le temps nécessaire pour une vraie transformation. Ensuite, tu choisis de prolonger ou non. En cas de motif légitime (raison médicale, déménagement), tu peux arrêter avec un mois de préavis.</p></div>
   </div>
   <div class="faq-item">
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -1026,7 +1060,7 @@
     <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
       <span class="txt">Et si je n'ai aucun résultat ?</span><span class="plus">+</span>
     </div>
-    <div class="faq-a"><p><b>Garantie 30 jours satisfait ou remboursé</b> : si tu as suivi l'ensemble de mes consignes (entraînements, nutrition, suivi) et que tu ne constates aucun résultat après ton programme, tu es intégralement remboursé. Cette garantie ne s'applique pas en cas de non-respect du programme fourni.</p></div>
+    <div class="faq-a"><p><b>Résultats garantis ou remboursé</b> : si ta mesure de fin (poids ou mensuration choisie au bilan de départ) n'a pas bougé alors que tu as suivi l'intégralité du programme (toutes les séances, l'alimentation et les bilans hebdo, enregistrés dans MB App), tu es remboursé sur simple demande écrite dans les 15 jours suivant la fin de ton accompagnement.</p></div>
   </div>
 </div>
 
@@ -1057,14 +1091,7 @@
     </div>
     <div class="modal-field">
       <label>Jour souhaité</label>
-      <select id="cbDay">
-        <option value="Lundi">Lundi</option>
-        <option value="Mardi">Mardi</option>
-        <option value="Mercredi">Mercredi</option>
-        <option value="Jeudi">Jeudi</option>
-        <option value="Vendredi">Vendredi</option>
-        <option value="Samedi">Samedi</option>
-      </select>
+      <select id="cbDay" onchange="mbFillSlots()"></select>
     </div>
     <div class="modal-field">
       <label>Créneau souhaité</label>
@@ -1244,20 +1271,52 @@
   // Au chargement, aucune offre n'est affichée tant que rien n'est sélectionné
   document.addEventListener('DOMContentLoaded', function(){ filterOffers(''); });
 
-  // Build time slots 09:00 -> 17:30 every 30 minutes
-  (function(){
-    var select = document.getElementById('cbSlot');
-    for (var h = 9; h <= 17; h++){
-      [0,30].forEach(function(m){
-        var hh = h.toString().padStart(2,'0');
-        var mm = m.toString().padStart(2,'0');
-        var opt = document.createElement('option');
-        opt.value = hh+':'+mm;
-        opt.textContent = hh+':'+mm;
-        select.appendChild(opt);
-      });
+  // Bilans : du lundi au samedi, de 10:00 à 18:30
+  // Premier créneau possible selon le moment de la demande :
+  // - en semaine avant 10 h : le soir même à partir de 18 h
+  // - en semaine après 10 h : au moins 18 h plus tard
+  // - vendredi à partir de 18 h ou samedi : lundi à partir de 10 h
+  // - dimanche : lundi à partir de 18 h
+  function mbEarliestBilan(now){
+    var d = now.getDay(), h = now.getHours() + now.getMinutes()/60;
+    function at(daysAhead, hour){ var x = new Date(now); x.setDate(x.getDate() + daysAhead); x.setHours(hour, 0, 0, 0); return x.getTime(); }
+    if (d === 0) return at(1, 18);
+    if (d === 6) return at(2, 10);
+    if (d === 5 && h >= 18) return at(3, 10);
+    if (h < 10) return at(0, 18);
+    return now.getTime() + 18*3600000;
+  }
+  function mbSlotsFor(d){
+    var out = [], now = new Date(), minT = mbEarliestBilan(now);
+    for (var m = 600; m <= 1110; m += 30){
+      var t = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(m/60), m%60);
+      if (t.getTime() < minT) continue;
+      out.push(String(t.getHours()).padStart(2,'0') + ':' + String(t.getMinutes()).padStart(2,'0'));
     }
-  })();
+    return out;
+  }
+  function mbFillDays(){
+    var J = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    var M = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+    var sel = document.getElementById('cbDay'); if (!sel) return; sel.innerHTML = '';
+    var base = new Date(); base.setHours(0,0,0,0);
+    for (var i = 0; i < 10 && sel.options.length < 6; i++){
+      var d = new Date(base); d.setDate(base.getDate() + i);
+      if (d.getDay() === 0 || !mbSlotsFor(d).length) continue;
+      var o = document.createElement('option');
+      o.value = J[d.getDay()] + ' ' + d.getDate() + ' ' + M[d.getMonth()];
+      o.textContent = (i === 0 ? 'Aujourd’hui' : i === 1 ? 'Demain' : J[d.getDay()]) + ' ' + d.getDate() + ' ' + M[d.getMonth()];
+      o.dataset.iso = d.toISOString(); sel.appendChild(o);
+    }
+    mbFillSlots();
+  }
+  function mbFillSlots(){
+    var day = document.getElementById('cbDay'), sel = document.getElementById('cbSlot'); if (!day || !sel) return;
+    sel.innerHTML = '';
+    var o = day.options[day.selectedIndex]; if (!o) return;
+    mbSlotsFor(new Date(o.dataset.iso)).forEach(function(h){ var x = document.createElement('option'); x.value = h; x.textContent = h; sel.appendChild(x); });
+  }
+  mbFillDays();
 
   function closeCallbackModal(){
     document.getElementById('callbackModal').classList.remove('open');
@@ -1438,6 +1497,116 @@
 })();
 </script>
 
+
+<script>
+/* Configurateur des offres en présentiel : séances par semaine et durée d'engagement */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmt(n){
+    var dec = Math.round(n*100) % 100 !== 0;
+    return new Intl.NumberFormat('fr-FR',{minimumFractionDigits:dec?2:0,maximumFractionDigits:2}).format(n).replace(/\u202f|\u00a0/g,'\u202f') + '\u20ac';
+  }
+  function tween(el, from, to){
+    if (!el) return;
+    if (reduce || from === to){ el.textContent = fmt(to); return; }
+    var start = null, dur = 550;
+    el.classList.remove('price-bump'); void el.offsetWidth; el.classList.add('price-bump');
+    function step(ts){
+      if (start === null) start = ts;
+      var p = Math.min((ts-start)/dur,1), e = 1 - Math.pow(1-p,3);
+      var v = from + (to-from)*e;
+      el.textContent = p < 1 ? fmt(Math.round(v)) : fmt(to);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function placePill(seg){
+    var on = seg.querySelector('button.on'), pill = seg.querySelector('.cfg-pill');
+    if (!on || !pill || !on.offsetWidth) return;
+    pill.style.width = on.offsetWidth + 'px';
+    pill.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+  }
+  document.querySelectorAll('.cfg').forEach(function(cfg){
+    var card = cfg.closest('.offer-card');
+    var prices = JSON.parse(cfg.getAttribute('data-prices'));
+    var sap = cfg.getAttribute('data-cfg') === 'dom';
+    var label = cfg.getAttribute('data-label');
+    var state = {f:'1', d:'3'};
+    var pctEl = card.querySelector('.offer-sap-percent'), oldEl = card.querySelector('.offer-sap-old'), newEl = card.querySelector('.offer-sap-new'), amtEl = card.querySelector('.offer-price .amt');
+    var note = cfg.querySelector('.cfg-note'), wa = card.querySelector('.offer-act.wa');
+    var cur = prices['1'][0];
+    var IDX = {'3':0,'6':1,'12':2};
+    var DESC = {
+      '3':  ['Transformation', 'jusqu’à <b>−12 kg</b>', 'Plus d’énergie dès les premières semaines, meilleur sommeil, confiance qui revient.'],
+      '6':  ['Nouveau corps', 'jusqu’à <b>−18 kg</b>', 'Silhouette redessinée, force en hausse, santé qui s’améliore et confiance retrouvée.'],
+      '12': ['Changement de vie', '<b>résultats à vie</b>', 'Poids perdu, poids gardé : énergie, santé et confiance installées pour de bon.']
+    };
+    /* Transformations réelles affichées pour chaque durée.
+       photo = numéro de la photo dans la section « Nos Transformations » (1 à 9).
+       Les kilos et la durée s’ajoutent à la légende dès qu’ils sont remplis (chiffres réels uniquement). */
+    var TRANSFOS = {
+      '3':  {photo: 6, prenom: 'David', kg: '', mois: '3'},
+      '6':  {photo: 4, prenom: 'Mélodie', kg: '', mois: '6'},
+      '12': {photo: 7, prenom: 'Sébastien', kg: '', mois: '12'}
+    };
+    var tfImgs = document.querySelectorAll('.transforms-strip .tcard img');
+    var tfBox = cfg.querySelector('.cfg-tf'), tfImg = tfBox && tfBox.querySelector('img'), tfCap = tfBox && tfBox.querySelector('.cfg-tf-cap');
+    function showTransfo(){
+      if (!tfBox) return;
+      var t = TRANSFOS[state.d], src = t && t.photo && tfImgs[t.photo - 1] && tfImgs[t.photo - 1].getAttribute('src');
+      if (!src || !t.prenom){ tfBox.hidden = true; return; }
+      tfBox.hidden = false;
+      tfBox.classList.add('swap');
+      setTimeout(function(){
+        tfImg.src = src; tfImg.alt = 'Transformation de ' + t.prenom;
+        tfCap.innerHTML = 'Fais comme <b>' + t.prenom + '</b>' +
+          (t.mois ? '<span class="cfg-tf-sub">Sa transformation en ' + (t.mois === '12' ? '1 an' : t.mois + ' mois') + '</span>' : ' !') +
+          (t.kg ? '<br><span style="opacity:.85">−' + t.kg + ' kg</span>' : '');
+        tfBox.classList.remove('swap');
+      }, reduce ? 0 : 200);
+    }
+    var desc = cfg.querySelector('.cfg-desc'), descT = cfg.querySelector('.cfg-desc-t'), descX = cfg.querySelector('.cfg-desc-x');
+    function current(){ return prices[state.f][IDX[state.d]]; }
+    function paidFor(price){
+      if (!sap) return price;
+      var credit = Math.min(price * 12, 12000) / 2 / 12; // crédit d'impôt plafonné à 12 000 € de dépenses par an
+      return Math.round((price - credit) * 100) / 100;
+    }
+    function render(animate){
+      var price = current(), paid = paidFor(price), capped = sap && price * 12 > 12000 && state.d === '12';
+      var perSession = paid / (Number(state.f) * 52 / 12);
+      if (sap){ tween(oldEl, cur, price); tween(newEl, paidFor(cur), paid); if (pctEl) pctEl.textContent = '-' + Math.round((1 - paid/price) * 100) + '%'; }
+      else { tween(amtEl, cur, price); }
+      cur = price;
+      var save = (prices[state.f][0] - price) * Number(state.d) * (sap ? 0.5 : 1);
+      var html = 'Soit <b>' + fmt(Math.round(perSession)) + ' la séance</b>' + (sap ? ' après réduction' : '') +
+        (save > 0 ? '<br>Engagement ' + state.d + ' mois : <b>' + fmt(Math.round(save)) + ' économisés</b>' : '<br>Engagement 3 mois minimum') +
+        (capped ? '<br><span style="opacity:.7">Crédit d’impôt plafonné (12 000 €/an)</span>' : '');
+      var d = DESC[state.d];
+      var dT = d[0] + '<br><span>' + d[1] + '</span>', dX = d[2];
+      function apply(){ note.innerHTML = html; descT.innerHTML = dT; descX.textContent = dX; note.classList.remove('swap'); desc.classList.remove('swap'); }
+      showTransfo();
+      if (animate && !reduce){ note.classList.add('swap'); if (descT.innerHTML !== dT) desc.classList.add('swap'); setTimeout(apply, 200); }
+      else apply();
+      if (wa){
+        var txt = 'Bonjour, je suis intéressé(e) par l\'offre : ' + label + ' – ' + (state.f === '1' ? '1 séance' : state.f + ' séances') + '/semaine – engagement ' + state.d + ' mois (' + fmt(price) + '/mois)';
+        wa.href = 'https://wa.me/33743798622?text=' + encodeURIComponent(txt);
+      }
+    }
+    cfg.querySelectorAll('.cfg-seg').forEach(function(seg){
+      seg.addEventListener('click', function(e){
+        var b = e.target.closest('button'); if (!b || b.classList.contains('on')) return;
+        seg.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+        state[b.getAttribute('data-k')] = b.getAttribute('data-v');
+        placePill(seg); render(true);
+      });
+      if ('ResizeObserver' in window) new ResizeObserver(function(){ placePill(seg); }).observe(seg);
+    });
+    render(false);
+  });
+  window.addEventListener('resize', function(){ document.querySelectorAll('.cfg-seg').forEach(placePill); });
+})();
+</script>
 <div class="footer-links">
   <a href="#">Conditions et assistance</a>
   <a href="#">Politique de confidentialité</a>
@@ -1480,6 +1649,7 @@
 <script>
   (function(){
     var FLYER_URL = 'bilan.html?src=site';
+    var FALLBACK_URL = 'https://maxcoachingfrance.github.io/flyer/?src=site';
     var pop = document.getElementById('flyerPop');
     var frame = document.getElementById('flyerFrame');
     var lastFocus = null;
@@ -1488,7 +1658,11 @@
       if(!frame.getAttribute('src')){
         // Transmet les paramètres d'annonce (gclid…) à la page bilan
         var q = location.search ? '&' + location.search.slice(1) : '';
-        frame.setAttribute('src', FLYER_URL + q);
+        frame.setAttribute('src', 'about:blank');
+        // Si bilan.html est absent du site, on affiche la page flyer d'origine
+        fetch('bilan.html', {method:'HEAD', cache:'no-store'})
+          .then(function(r){ frame.setAttribute('src', (r.ok ? FLYER_URL : FALLBACK_URL) + q); })
+          .catch(function(){ frame.setAttribute('src', FALLBACK_URL + q); });
       }
       lastFocus = document.activeElement;
       pop.classList.add('open');
