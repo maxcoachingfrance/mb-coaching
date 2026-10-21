@@ -612,6 +612,23 @@ section.mx .mx-badge{position:absolute;top:-12px;right:14px;background:#ff3a3a;c
 section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;border-radius:50%;background:#0a0a0a;border:2px solid #333;color:#9a9a9a;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;margin:-4px auto}
 @media (min-width:720px){.mx-cols{grid-template-columns:1fr auto 1fr}}
 .hero-promise span{color:#ff3a3a}
+/* ===== Offres : cartes centrées, défilement avec flèches, changements fluides ===== */
+#offerResult{position:relative}
+.offres-strip{scroll-snap-type:x mandatory!important;padding-left:calc(50% - min(39vw,145px))!important;padding-right:calc(50% - min(39vw,145px))!important;scroll-behavior:smooth}
+.offres-strip .offer-card{scroll-snap-align:center!important;scroll-snap-stop:always}
+.strip-arrow{position:absolute;z-index:6;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:rgba(10,10,10,.82);color:#fff;font-size:1.5rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .25s ease,transform .2s ease;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:0 0 3px}
+.strip-arrow.next{right:6px;animation:arrowNudge 1.6s ease-in-out infinite}
+.strip-arrow.prev{left:6px}
+.strip-arrow[hidden]{display:none}
+@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.strip-arrow.next{animation:none}.offres-strip{scroll-behavior:auto}}
+.offer-card[data-type="transfo"] .offer-sap-highlight,.offer-card[data-type="transfo"] .mx-plain{height:108px;min-height:108px;box-sizing:border-box;margin:0 0 12px}
+.offer-card[data-type="transfo"] .mx-plain{display:flex;align-items:center;justify-content:center}
+.mx-fadein{animation:mxFade .3s ease both}
+@keyframes mxFade{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.cfg-lieu{max-height:none!important;margin:0!important;transition:opacity .3s ease,filter .3s ease}
+.cfg-lieu.cfg-hide{max-height:none!important;margin:0!important;opacity:.28;filter:grayscale(1);pointer-events:none}
+
 .cfg-lieu{overflow:hidden;max-height:120px;transition:max-height .35s ease,opacity .3s ease,margin .3s ease}
 .cfg-lieu.cfg-hide{max-height:0;opacity:0;margin:-10px 0 0;pointer-events:none}
 .mx-plain{margin:6px 0 4px}
@@ -1672,6 +1689,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         var wasSap = sap; sap = isSap();
         if (sapBox) sapBox.style.display = sap ? '' : 'none';
         if (plainBox) plainBox.style.display = sap ? 'none' : '';
+        if (wasSap !== sap){ var shown = sap ? sapBox : plainBox; if (shown){ shown.classList.remove('mx-fadein'); void shown.offsetWidth; shown.classList.add('mx-fadein'); } }
         if (lieuRow) lieuRow.classList.toggle('cfg-hide', state.f === '0');
         if (titleEl) titleEl.textContent = state.f === '0' ? 'Coaching en ligne' : (state.l === 'domicile' ? 'Coaching à domicile' : 'Coaching en salle');
         label = titleEl ? titleEl.textContent : label;
@@ -1713,6 +1731,42 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
     cur = current(); render(false);
   });
   window.addEventListener('resize', function(){ document.querySelectorAll('.cfg-seg').forEach(placePill); });
+})();
+</script>
+<script>
+/* Flèches pour faire défiler les offres, cartes centrées */
+(function(){
+  var res = document.getElementById('offerResult'), strip = document.querySelector('.offres-strip');
+  if (!res || !strip) return;
+  var prev = document.createElement('button'), next = document.createElement('button');
+  prev.type = next.type = 'button';
+  prev.className = 'strip-arrow prev'; next.className = 'strip-arrow next';
+  prev.setAttribute('aria-label','Offre précédente'); next.setAttribute('aria-label','Offre suivante');
+  prev.innerHTML = '&lsaquo;'; next.innerHTML = '&rsaquo;';
+  res.appendChild(prev); res.appendChild(next);
+  function cards(){ return Array.prototype.filter.call(strip.querySelectorAll('.offer-card'), function(c){ return c.style.display !== 'none' && c.offsetWidth > 0; }); }
+  function update(){
+    var cs = cards(), many = cs.length > 1;
+    var top = strip.offsetTop + Math.min(180, strip.offsetHeight / 2) - 21;
+    prev.style.top = next.style.top = top + 'px';
+    var max = strip.scrollWidth - strip.clientWidth;
+    prev.hidden = !many || strip.scrollLeft < 10;
+    next.hidden = !many || strip.scrollLeft > max - 10;
+  }
+  function go(dir){
+    var cs = cards(); if (!cs.length) return;
+    var center = strip.scrollLeft + strip.clientWidth / 2, idx = 0, best = 1e9;
+    cs.forEach(function(c, i){ var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center); if (d < best){ best = d; idx = i; } });
+    var t = cs[Math.max(0, Math.min(cs.length - 1, idx + dir))];
+    strip.scrollTo({left: t.offsetLeft + t.offsetWidth / 2 - strip.clientWidth / 2, behavior: 'smooth'});
+  }
+  prev.addEventListener('click', function(){ go(-1); });
+  next.addEventListener('click', function(){ go(1); });
+  strip.addEventListener('scroll', function(){ window.requestAnimationFrame(update); }, {passive:true});
+  window.addEventListener('resize', update);
+  new MutationObserver(function(){ setTimeout(update, 60); }).observe(res, {attributes:true, subtree:true, attributeFilter:['hidden','style']});
+  setInterval(function(){ if (!res.hidden) update(); }, 800);
+  update();
 })();
 </script>
 <div class="footer-links">
