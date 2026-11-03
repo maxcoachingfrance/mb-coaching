@@ -124,7 +124,7 @@
     content:'';position:absolute;inset:0;
     background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.65) 100%);
   }
-  .hero-content{position:absolute;z-index:2;top:55%;left:0;right:0;padding:0 22px;text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .hero-content{position:absolute;z-index:2;top:54%;left:0;right:0;padding:0 22px;text-align:center;display:flex;flex-direction:column;align-items:center;}
   .mb-badge{height:3.2rem;width:auto;display:block;margin-bottom:8px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));}
   .hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;line-height:1.15;color:#fff;text-transform:uppercase;text-align:center;margin:0;letter-spacing:0.3px;text-shadow:0 2px 10px rgba(0,0,0,0.6);}
   .hero-sub{
@@ -611,7 +611,7 @@
 </style>
 <style>
 /* ===== Sections ajoutées : sobres, dans le style du site ===== */
-.hero-promise{margin:1cm 0 0;padding:0 16px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;line-height:1.05;letter-spacing:1px;text-transform:uppercase;color:#fff;text-shadow:0 3px 22px rgba(0,0,0,.75)}
+.hero-promise{margin:.15cm 0 0;padding:0 16px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;line-height:1.05;letter-spacing:1px;text-transform:uppercase;color:#fff;text-shadow:0 3px 22px rgba(0,0,0,.75)}
 /* contraste renforcé : salle (éteint) contre MB Coaching (mis en avant) */
 section.mx .mx-col{background:#0e0e0e;border:1px dashed #2c2c2c}
 section.mx .mx-col h3{color:#6a6a6a}
@@ -647,7 +647,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
 .mx-plain{margin:6px 0 4px}
 .hero .hero-promise{white-space:normal!important;line-height:1.25!important;font-size:clamp(1.15rem,5.2vw,1.7rem)!important;font-weight:700!important;letter-spacing:4px!important;text-shadow:0 2px 14px rgba(0,0,0,.7)!important}
 .hero .hero-promise:after{content:'';display:block;width:42px;height:2px;background:#ff3a3a;margin:12px auto 0;border-radius:2px}
-.hero-promise-sub{margin:24px 0 0;text-align:center;font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(.72rem,3.2vw,.95rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.88);text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.hero-promise-sub{margin:20px 0 0;text-align:center;font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(.72rem,3.2vw,.95rem);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.88);text-shadow:0 2px 10px rgba(0,0,0,.7)}
 @media (max-width:380px){.hero-promise-sub{letter-spacing:1.6px}}
 .hero .hero-promise{font-size:clamp(1.9rem,8.6vw,3.2rem);white-space:nowrap}
 @media (min-width:720px){.hero-promise{font-size:2.8rem}}
@@ -1321,7 +1321,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
     finderState.goal = goal; finderState.mode = null;
     markPicked('finderGoals','data-goal',goal);
     setTimeout(function(){
-      if (goal === 'prepa' || goal === 'transfo') showResult(byId('paneGoal'));
+      if (goal === 'prepa') showResult(byId('paneGoal'));
       else swapPane(byId('paneGoal'), byId('paneMode'), true);
     }, 550);
   }
