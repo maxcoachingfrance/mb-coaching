@@ -286,7 +286,7 @@
 
   <div class="promo-strip" role="note">
     <p class="promo-strip-t">&#9203; Dernier jour pour profiter de l&rsquo;offre exclusive</p>
-    <p class="promo-strip-s">Votre coaching &agrave; <b>299&nbsp;&euro;</b> au lieu de <s>499&nbsp;&euro;</s> &middot; se termine ce soir &agrave; minuit</p>
+    <p class="promo-strip-s">Coaching &agrave; <b>299&nbsp;&euro;</b> au lieu de <s>599&nbsp;&euro;</s> &middot; en ligne <b>199&nbsp;&euro;</b> au lieu de <s>349&nbsp;&euro;</s> &middot; se termine ce soir &agrave; minuit</p>
     <p class="promo-cd">--:--:--</p>
   </div>
 
@@ -356,7 +356,7 @@
     </div>
   </section>
 
-  <a class="site-btn" href="https://mbimbeau.fr/#offres" target="_top">Voir nos offres et tarifs</a>
+  <a class="site-btn" href="https://mbimbeau.fr/#offres" target="_top" onclick="return voirOffres()">Voir nos offres et tarifs</a>
 
   <footer class="legal-footer">
     <p class="legal-brand">MB Coaching</p>
@@ -499,6 +499,15 @@
     slotsFor(new Date(o.dataset.iso)).forEach(function(h){
       var opt = document.createElement('option'); opt.value = h; opt.textContent = h; sel.appendChild(opt);
     });
+  }
+
+  // Ouverte en popup sur le site : on demande au site de fermer la popup et d'aller aux offres
+  function voirOffres(){
+    if (window.parent && window.parent !== window){
+      window.parent.postMessage('mb-voir-offres', '*');
+      return false;
+    }
+    return true;
   }
 
   function trackConversion(kind){
