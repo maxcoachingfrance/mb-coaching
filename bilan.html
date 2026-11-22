@@ -221,6 +221,10 @@
   .promo-cd-row{margin-top:4px;line-height:1.1;}
   .promo-cd-row .promo-cd{display:inline;margin:0;}
   .promo-cd-lab{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.75);vertical-align:middle;margin-right:4px;}
+  .btn-cd{display:block;margin-top:2px;font-family:'Barlow',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.3px;text-transform:none;opacity:.9;}
+  .btn-cd .promo-cd{display:inline;margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.9rem;line-height:1;}
+  .wa-btn{flex-wrap:wrap;}
+  .wa-btn .btn-cd{flex-basis:100%;text-align:center;}
 </style>
 </head>
 <body>
@@ -358,7 +362,7 @@
     </div>
   </section>
 
-  <a class="site-btn" href="https://mbimbeau.fr/#offres" target="_top" onclick="return voirOffres()">Voir nos offres et tarifs</a>
+  <a class="site-btn" href="https://mbimbeau.fr/#offres" target="_top" onclick="return voirOffres()">Voir nos offres et tarifs<span class="btn-cd">Fin dans&nbsp;: <span class="promo-cd">--:--:--</span></span></a>
 
   <footer class="legal-footer">
     <p class="legal-brand">MB Coaching</p>
@@ -432,7 +436,7 @@
 
   // Compte à rebours de l'offre
   (function(){
-    var el = document.querySelector('.promo-cd'); if (!el) return;
+
     function end(){
       if (PROMO_FIN){ var d = new Date(PROMO_FIN); if (!isNaN(d)) return d.getTime(); }
       var m = new Date(); m.setHours(24,0,0,0); return m.getTime();
@@ -441,7 +445,8 @@
     function tick(){
       var left = Math.max(0, Math.floor((end() - Date.now()) / 1000));
       var h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60), sec = left % 60;
-      el.textContent = (h >= 24 ? Math.floor(h / 24) + 'j ' + pad(h % 24) : pad(h)) + ':' + pad(m) + ':' + pad(sec);
+      var txt = (h >= 24 ? Math.floor(h / 24) + 'j ' + pad(h % 24) : pad(h)) + ':' + pad(m) + ':' + pad(sec);
+      document.querySelectorAll('.promo-cd').forEach(function(x){ x.textContent = txt; });
     }
     tick(); setInterval(tick, 1000);
   })();
