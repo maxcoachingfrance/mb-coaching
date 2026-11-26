@@ -277,6 +277,7 @@
 .offer-act.wa{background:#25D366;color:#0a0a0a;}
 .offer-act.wa svg{fill:#0a0a0a;}
 .offer-act.call{background:#fff;color:#0a0a0a;}
+.offer-act.tel{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75);text-decoration:none;}
 
 /* Duree sous le tarif, TTC et garantie : centres */
 .offer-card .offer-price{justify-content:center;text-align:center;}
@@ -577,6 +578,7 @@
   }
   .contact-btn.wa{background:#25D366;color:#0a0a0a;}
   .contact-btn.call{background:#fff;color:var(--red);}
+  .contact-btn.tel{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.75);}
   .contact-btn.dark{background:#0a0a0a;color:#fff;}
 
   /* CALLBACK MODAL */
@@ -894,7 +896,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
 <!-- OFFRES -->
 <div class="offres-wrap" id="offres">
   <p class="section-title">Un objectif, une offre</p>
-  <div class="promo-strip" role="note"><p class="promo-strip-t">Offre exclusive</p><p class="promo-strip-cd"><span class="promo-cd-lab">Fin dans&nbsp;:</span> <span class="promo-cd">--:--:--</span></p></div>
+  <div class="promo-strip" role="note"><p class="promo-strip-t">Offre exclusive</p><p class="promo-strip-s">Tarifs valables jusqu&rsquo;au <b>15 d&eacute;cembre</b></p></div>
   <div class="finder-pane" id="paneGoal">
     <p class="finder-q">Quel est votre objectif&nbsp;?</p>
     <div class="finder-choices" id="finderGoals">
@@ -925,7 +927,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <div class="sess-seg" role="radiogroup" aria-label="S&eacute;ances par semaine"><button type="button" class="on" role="radio" aria-checked="true" data-s="1">1 s&eacute;ance<em>par semaine</em></button><button type="button" role="radio" aria-checked="false" data-s="2">2 s&eacute;ances<em>par semaine</em></button></div>
         <div class="offer-sap-highlight promo-box">
           <div class="offer-sap-highlight-info">
-            <div class="offer-sap-prices"><span class="offer-sap-old">499&euro;</span><span class="offer-sap-new">299&euro;</span><span class="offer-sap-percent">-40%</span></div>
+            <div class="offer-sap-prices"><span class="offer-sap-new">299&euro;</span></div>
             <span class="offer-sap-unit">par mois &middot; offre exclusive</span>
           </div>
         </div>
@@ -933,7 +935,8 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <p class="offer-ttc">Prix TTC + Facture</p>
         <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
-          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20%C3%A0%20domicile%20%281%20s%C3%A9ance%20par%20semaine%29%20%C3%A0%20299%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Fin dans&nbsp;: <span class="promo-cd">--:--:--</span></span></a>
+          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20%C3%A0%20domicile%20%281%20s%C3%A9ance%20par%20semaine%29%20%C3%A0%20299%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Offre valable jusqu&rsquo;au 15 d&eacute;cembre</span></a>
+          <a class="offer-act tel" href="tel:+33662442238">&#128222; Appeler</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
       </div>
@@ -946,7 +949,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <div class="sess-seg" role="radiogroup" aria-label="S&eacute;ances par semaine"><button type="button" class="on" role="radio" aria-checked="true" data-s="1">1 s&eacute;ance<em>par semaine</em></button><button type="button" role="radio" aria-checked="false" data-s="2">2 s&eacute;ances<em>par semaine</em></button></div>
         <div class="offer-sap-highlight promo-box">
           <div class="offer-sap-highlight-info">
-            <div class="offer-sap-prices"><span class="offer-sap-old">499&euro;</span><span class="offer-sap-new">299&euro;</span><span class="offer-sap-percent">-40%</span></div>
+            <div class="offer-sap-prices"><span class="offer-sap-new">299&euro;</span></div>
             <span class="offer-sap-unit">par mois &middot; offre exclusive</span>
           </div>
         </div>
@@ -954,7 +957,8 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <p class="offer-ttc">Prix TTC + Facture</p>
         <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
-          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20en%20salle%20%281%20s%C3%A9ance%20par%20semaine%29%20%C3%A0%20299%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Fin dans&nbsp;: <span class="promo-cd">--:--:--</span></span></a>
+          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20en%20salle%20%281%20s%C3%A9ance%20par%20semaine%29%20%C3%A0%20299%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Offre valable jusqu&rsquo;au 15 d&eacute;cembre</span></a>
+          <a class="offer-act tel" href="tel:+33662442238">&#128222; Appeler</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
       </div>
@@ -966,7 +970,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <div class="offer-divider"></div>
         <div class="offer-sap-highlight promo-box">
           <div class="offer-sap-highlight-info">
-            <div class="offer-sap-prices"><span class="offer-sap-old">299&euro;</span><span class="offer-sap-new">199&euro;</span><span class="offer-sap-percent">-33%</span></div>
+            <div class="offer-sap-prices"><span class="offer-sap-new">199&euro;</span></div>
             <span class="offer-sap-unit">par mois &middot; offre exclusive</span>
           </div>
         </div>
@@ -974,7 +978,8 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         <p class="offer-ttc">Prix TTC + Facture</p>
         <p class="offer-guarantee">R&eacute;sultats garantis ou 100&nbsp;% rembours&eacute;*</p>
         <div class="offer-actions">
-          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20en%20ligne%20%C3%A0%20199%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Fin dans&nbsp;: <span class="promo-cd">--:--:--</span></span></a>
+          <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20exclusive%20%3A%20Coaching%20en%20ligne%20%C3%A0%20199%20%E2%82%AC/mois" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp<span class="btn-cd">Offre valable jusqu&rsquo;au 15 d&eacute;cembre</span></a>
+          <a class="offer-act tel" href="tel:+33662442238">&#128222; Appeler</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
       </div>
@@ -1006,6 +1011,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         </div>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Pr%C3%A9-saison%20Performance%20%288%20semaines%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <a class="offer-act tel" href="tel:+33662442238">&#128222; Appeler</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
       </div>
@@ -1040,6 +1046,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         </div>
         <div class="offer-actions">
           <a class="offer-act wa" href="https://wa.me/33662442238?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20l%27offre%20%3A%20Saison%20Performance%20%28Accompagnement%20annuel%29" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg> WhatsApp</a>
+          <a class="offer-act tel" href="tel:+33662442238">&#128222; Appeler</a>
           <button type="button" class="offer-act call" onclick="document.getElementById('callbackModal').classList.add('open')">&#128222; R&eacute;server un appel</button>
         </div>
       </div>
@@ -1135,6 +1142,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.36-1.36c1.38.72 2.94 1.14 4.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.91C21.87 6.45 17.5 2 12.04 2zm0 18.13c-1.46 0-2.83-.4-4-1.08l-.29-.17-2.98.76.8-2.9-.19-.3a8.15 8.15 0 0 1-1.25-4.34c0-4.51 3.68-8.18 8.2-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.78c0 4.51-3.68 8.03-8.48 8.03z"/></svg>
       WhatsApp
     </a>
+    <a class="contact-btn tel" href="tel:+33662442238">&#128222; Appeler · 06 62 44 22 38</a>
     <a class="contact-btn call" href="javascript:void(0)" onclick="document.getElementById('callbackModal').classList.add('open')">📞 Réserver un appel</a>
   </div>
 </div>
@@ -1146,11 +1154,15 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
     <p class="modal-title">Être rappelé(e)</p>
     <div class="modal-field">
       <label>Nom et prénom</label>
-      <input type="text" id="cbName" placeholder="Ton nom et prénom">
+      <input type="text" id="cbName" placeholder="Votre nom et prénom">
     </div>
     <div class="modal-field">
       <label>Numéro de téléphone</label>
       <input type="tel" id="cbPhone" placeholder="06 12 34 56 78">
+    </div>
+    <div class="modal-field">
+      <label>Ville</label>
+      <input type="text" id="cbCity" autocomplete="address-level2" placeholder="Ex : Saint-Maur-des-Fossés">
     </div>
     <div class="modal-field">
       <label>Jour souhaité</label>
@@ -1393,15 +1405,17 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
     document.getElementById('cbSuccessView').style.display = 'none';
     document.getElementById('cbName').value = '';
     document.getElementById('cbPhone').value = '';
+    document.getElementById('cbCity').value = '';
   }
 
   function submitCallback(){
     var name = document.getElementById('cbName').value.trim();
     var phone = document.getElementById('cbPhone').value.trim();
+    var city = document.getElementById('cbCity').value.trim();
     var day = document.getElementById('cbDay').value;
     var slot = document.getElementById('cbSlot').value;
-    if(!name || !phone){
-      alert('Merci de renseigner votre nom et votre numéro de téléphone.');
+    if(!name || !phone || !city){
+      alert('Merci de renseigner votre nom, votre numéro de téléphone et votre ville.');
       return;
     }
     var payload = {
@@ -1411,6 +1425,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
       message: 'Nouvelle demande de rappel.' +
                '\nNom : ' + name +
                '\nTéléphone : ' + phone +
+               '\nVille : ' + city +
                '\nCréneau souhaité : ' + day + ' à ' + slot
     };
     fetch('https://api.web3forms.com/submit', {
@@ -1418,6 +1433,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(payload)
     });
+    if (window.mbTrack) mbTrack(window.MB_ADS && MB_ADS.formulaire);
     document.getElementById('cbFormView').style.display = 'none';
     document.getElementById('cbSuccessView').style.display = '';
   }
@@ -1631,7 +1647,7 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
       tfBox.classList.add('swap');
       setTimeout(function(){
         tfImg.src = src; tfImg.alt = 'Transformation de ' + t.prenom;
-        tfCap.innerHTML = 'Fais comme <b>' + t.prenom + '</b>' +
+        tfCap.innerHTML = 'Faites comme <b>' + t.prenom + '</b>' +
           (t.mois ? '<span class="cfg-tf-sub">Sa transformation en ' + (t.mois === '12' ? '1 an' : t.mois + ' mois') + '</span>' : ' !') +
           (t.kg ? '<br><span style="opacity:.85">−' + t.kg + ' kg</span>' : '');
         tfBox.classList.remove('swap');
@@ -1721,8 +1737,8 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
 })();
 </script>
 <div class="footer-links">
-  <a href="#">Conditions et assistance</a>
-  <a href="#">Politique de confidentialité</a>
+  <a href="#mentions" onclick="return openLegal('mentions')">Mentions légales &amp; conditions</a>
+  <a href="#confidentialite" onclick="return openLegal('confidentialite')">Politique de confidentialité</a>
 </div>
 
 <script>
@@ -1855,29 +1871,6 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
 </script>
 
 <script>
-/* ===== Compte a rebours de l'offre exclusive =====
-   PROMO_FIN vide   = l'offre se termine chaque soir a minuit (heure du visiteur).
-   PROMO_FIN rempli = vraie date de fin, ex : '2026-11-30T23:59:59'. */
-(function(){
-  var PROMO_FIN = '';
-  function end(){
-    if (PROMO_FIN){ var d = new Date(PROMO_FIN); if (!isNaN(d)) return d.getTime(); }
-    var m = new Date(); m.setHours(24,0,0,0); return m.getTime();
-  }
-  function pad(n){ return (n < 10 ? '0' : '') + n; }
-  var els = document.querySelectorAll('.promo-cd');
-  function tick(){
-    var left = Math.max(0, Math.floor((end() - Date.now()) / 1000));
-    var h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60), sec = left % 60;
-    var txt = (h >= 24 ? Math.floor(h / 24) + 'j ' + pad(h % 24) : pad(h)) + ':' + pad(m) + ':' + pad(sec);
-    els = document.querySelectorAll('.promo-cd');
-    for (var i = 0; i < els.length; i++) els[i].textContent = txt;
-  }
-  tick(); setInterval(tick, 1000);
-})();
-</script>
-
-<script>
 /* Choix 1 ou 2 seances sur les cartes presentiel */
 (function(){
   function fmt(n){ return n + '\u20ac'; }
@@ -1892,8 +1885,8 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
         card.querySelectorAll('.sess-seg button').forEach(function(x){
           var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-checked', on ? 'true' : 'false');
         });
-        old.textContent = fmt(p[0]); nw.textContent = fmt(p[1]);
-        pct.textContent = '-' + Math.round((1 - p[1] / p[0]) * 100) + '%';
+        if (old) old.textContent = fmt(p[0]); nw.textContent = fmt(p[1]);
+        if (pct) pct.textContent = '-' + Math.round((1 - p[1] / p[0]) * 100) + '%';
         if (wa){
           var msg = "Bonjour, je suis intéressé(e) par l'offre exclusive : " + title + ' (' + n + (n === '1' ? ' séance' : ' séances') + ' par semaine) à ' + p[1] + ' €/mois';
           wa.href = 'https://wa.me/33662442238?text=' + encodeURIComponent(msg);
@@ -1905,5 +1898,154 @@ section.mx .mx-vs{justify-self:center;align-self:center;width:42px;height:42px;b
   });
 })();
 </script>
+<script>
+  /* ===================== GOOGLE ADS : À RÉGLER =====================
+     id          : identifiant du compte, ex 'AW-123456789' (vide = aucun suivi, aucun bandeau cookies)
+     formulaire  : conversion « Demande de rappel », ex 'AW-123456789/AbCdEf'
+     whatsapp    : conversion « Clic WhatsApp »
+     appel       : conversion « Clic Appeler »                              */
+  window.MB_ADS = {id: '', formulaire: '', whatsapp: '', appel: ''};
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a || !window.mbTrack) return;
+    var h = a.getAttribute('href') || '';
+    if (h.indexOf('wa.me/') > -1) mbTrack(MB_ADS.whatsapp);
+    else if (h.indexOf('tel:') === 0) mbTrack(MB_ADS.appel);
+  }, true);
+</script>
+<!-- ===== MENTIONS LÉGALES, CONFIDENTIALITÉ & COOKIES (MB Coaching) ===== -->
+<style>
+  .lg-pop{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.78);display:none;align-items:flex-end;justify-content:center;}
+  .lg-pop.open{display:flex;}
+  .lg-box{background:#141414;color:#fff;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;border-radius:22px 22px 0 0;padding:22px 20px 30px;font-family:'Barlow',sans-serif;font-size:.9rem;line-height:1.55;}
+  .lg-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;}
+  .lg-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin:0;}
+  .lg-close{background:rgba(255,255,255,.1);border:0;color:#fff;width:34px;height:34px;border-radius:50%;font-size:1.05rem;cursor:pointer;flex:none;}
+  .lg-box h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.02rem;text-transform:uppercase;letter-spacing:.3px;margin:18px 0 4px;color:#ff3a3a;}
+  .lg-box p,.lg-box li{color:rgba(255,255,255,.8);}
+  .lg-box ul{padding-left:18px;margin:4px 0;}
+  .lg-box a{color:#fff;}
+  .lg-sec[hidden]{display:none;}
+  .ck-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:1900;max-width:520px;margin:0 auto;background:#1b1b1b;color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 16px;box-shadow:0 14px 34px rgba(0,0,0,.5);font-family:'Barlow',sans-serif;font-size:.82rem;line-height:1.45;display:none;}
+  .ck-bar.open{display:block;}
+  .ck-bar a{color:#fff;text-decoration:underline;cursor:pointer;}
+  .ck-btns{display:flex;gap:8px;margin-top:10px;}
+  .ck-btns button{flex:1;border-radius:100px;padding:10px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.95rem;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;}
+  .ck-no{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);}
+  .ck-yes{background:#ff3a3a;color:#fff;border:1.5px solid #ff3a3a;}
+</style>
+
+<div class="lg-pop" id="lgPop" role="dialog" aria-modal="true" aria-labelledby="lgTitle" onclick="if(event.target===this)closeLegal()">
+  <div class="lg-box">
+    <div class="lg-head"><p class="lg-title" id="lgTitle">Mentions légales</p><button class="lg-close" type="button" onclick="closeLegal()" aria-label="Fermer">✕</button></div>
+
+    <div class="lg-sec" data-lg="mentions">
+      <h3>Éditeur du site</h3>
+      <p><b>MB COACHING</b> — entreprise individuelle (micro-entreprise)<br>
+      Rue du Franc Mûrier, 77000 Melun<br>
+      SIRET : 999 160 260 00017<br>
+      Téléphone / WhatsApp : <a href="tel:+33662442238">06 62 44 22 38</a><br>
+      Directeur de la publication : le responsable de MB Coaching.</p>
+
+      <h3>Hébergement</h3>
+      <p>GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — github.com</p>
+
+      <h3>Tarifs</h3>
+      <p>Prix indiqués en euros, toutes taxes comprises. TVA non applicable, article 293 B du CGI. Une facture est remise pour chaque prestation. Offre exclusive valable jusqu'au 15 décembre 2026.</p>
+
+      <h3>Garantie « Résultats garantis ou 100 % remboursé »</h3>
+      <p>Si votre mesure de fin (poids ou mensuration choisie au bilan de départ) n'a pas évolué alors que vous avez suivi l'intégralité du programme (toutes les séances, l'alimentation et les bilans hebdomadaires, enregistrés dans MB App), vous êtes remboursé sur simple demande écrite dans les 15 jours suivant la fin de votre accompagnement.</p>
+
+      <h3>Résultats</h3>
+      <p>Les résultats présentés (photos, témoignages, kilos perdus) sont ceux de clients réels, publiés avec leur accord. Ils varient d'une personne à l'autre selon le point de départ, la régularité et le suivi du programme.</p>
+
+      <h3>Propriété intellectuelle</h3>
+      <p>Les textes, photos, vidéos, logos et visuels de ce site appartiennent à MB Coaching ou sont utilisés avec autorisation. Toute reproduction sans accord écrit est interdite.</p>
+
+      <h3>Médiation de la consommation</h3>
+      <p>En cas de litige non résolu à l'amiable, vous pouvez recourir gratuitement à un médiateur de la consommation. La plateforme européenne de règlement des litiges en ligne est accessible sur ec.europa.eu/consumers/odr.</p>
+    </div>
+
+    <div class="lg-sec" data-lg="confidentialite" hidden>
+      <h3>Responsable du traitement</h3>
+      <p>MB COACHING, Rue du Franc Mûrier, 77000 Melun — SIRET 999 160 260 00017 — <a href="tel:+33662442238">06 62 44 22 38</a>.</p>
+
+      <h3>Données collectées et utilisation</h3>
+      <ul>
+        <li><b>Formulaires</b> (demande de rappel, bilan, appel offert) : nom, téléphone, e-mail, ville, objectif, lieu d'entraînement, créneau souhaité. Elles servent uniquement à vous recontacter, organiser votre rendez-vous et vous proposer la formule adaptée.</li>
+        <li><b>Paiement du bilan</b> : il est traité par Stripe. Vos données bancaires ne passent jamais par ce site.</li>
+        <li><b>WhatsApp</b> : si vous nous écrivez, vos messages sont traités par WhatsApp (Meta).</li>
+        <li><b>Statistiques de visite</b> : pages et sections consultées, clics, site de provenance et ville approximative déduite de l'adresse IP, pour mesurer la fréquentation du site.</li>
+      </ul>
+
+      <h3>Prestataires</h3>
+      <p>Web3Forms (transmission des formulaires par e-mail), Stripe (paiement), GitHub (hébergement), ipapi.co (localisation approximative) et, si vous l'acceptez, Google Ads (mesure des publicités). Vos données ne sont jamais vendues.</p>
+
+      <h3>Durée de conservation</h3>
+      <p>3 ans après le dernier contact pour les demandes sans suite ; pendant l'accompagnement puis selon les obligations légales (10 ans pour les factures) pour les clients.</p>
+
+      <h3>Cookies</h3>
+      <p>Avec votre accord uniquement, des cookies Google Ads mesurent si nos publicités amènent des demandes de contact. Vous pouvez changer d'avis à tout moment : <a onclick="mbCookieReset()">gérer mes cookies</a>.</p>
+
+      <h3>Vos droits</h3>
+      <p>Vous pouvez demander l'accès, la rectification, l'effacement ou la portabilité de vos données, ou vous opposer à leur utilisation, par téléphone ou WhatsApp au <a href="tel:+33662442238">06 62 44 22 38</a>. Vous pouvez aussi adresser une réclamation à la CNIL (cnil.fr).</p>
+    </div>
+  </div>
+</div>
+
+<div class="ck-bar" id="ckBar" role="dialog" aria-label="Cookies">
+  Nous utilisons des cookies Google Ads pour mesurer l'efficacité de nos publicités, uniquement avec votre accord. <a onclick="openLegal('confidentialite')">En savoir plus</a>
+  <div class="ck-btns"><button class="ck-no" type="button" onclick="mbCookieChoice('denied')">Refuser</button><button class="ck-yes" type="button" onclick="mbCookieChoice('granted')">Accepter</button></div>
+</div>
+
+<script>
+  (function(){
+    var pop = document.getElementById('lgPop');
+    window.openLegal = function(which){
+      which = which || 'mentions';
+      pop.querySelectorAll('.lg-sec').forEach(function(s){ s.hidden = s.getAttribute('data-lg') !== which; });
+      document.getElementById('lgTitle').textContent = which === 'mentions' ? 'Mentions légales' : 'Confidentialité & cookies';
+      pop.classList.add('open');
+      pop.querySelector('.lg-box').scrollTop = 0;
+      return false;
+    };
+    window.closeLegal = function(){ pop.classList.remove('open'); };
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLegal(); });
+  })();
+
+  /* ----- Consentement cookies + Google Ads ----- */
+  (function(){
+    var KEY = 'mbConsent';
+    function get(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+    function set(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+    function cfg(){ return window.MB_ADS || {}; }
+    window.mbLoadAds = function(){
+      var id = cfg().id; if (!id || window.__mbAdsLoaded || get() !== 'granted') return false;
+      window.__mbAdsLoaded = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+      gtag('js', new Date()); gtag('config', id);
+      var sc = document.createElement('script'); sc.async = true;
+      sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+      document.head.appendChild(sc);
+      return true;
+    };
+    window.mbTrack = function(sendTo){
+      if (!sendTo || !cfg().id || get() !== 'granted') return;
+      mbLoadAds();
+      if (typeof window.gtag === 'function') gtag('event', 'conversion', {send_to: sendTo, transport_type: 'beacon'});
+    };
+    window.mbCookieChoice = function(v){ set(v); document.getElementById('ckBar').classList.remove('open'); if (v === 'granted') mbLoadAds(); };
+    window.mbCookieReset = function(){ closeLegal(); document.getElementById('ckBar').classList.add('open'); };
+    function init(){
+      if (!cfg().id) return;                       // pas d'identifiant Google Ads = pas de bandeau
+      var c = get();
+      if (c === 'granted') { mbLoadAds(); return; }
+      if (!c && (!cfg().onlyTop || window.top === window)) document.getElementById('ckBar').classList.add('open');
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  })();
+</script>
+<!-- ===== FIN MENTIONS / COOKIES ===== -->
+
 </body>
 </html>
